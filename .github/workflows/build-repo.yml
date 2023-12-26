@@ -15,12 +15,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # - name: Clean secret management files
-      #   run: |
-      #     rm -rf \
-      #       images/src/alpine-base/.devcontainer.json \
-      #       features/src/vip-cli \
-      #       features/src/vip-go-mu-plugins
+      - name: Clean secret management files
+        run: |
+          rm -rf \
+            images/src/alpine-base/.devcontainer.json \
+      #      features/src/vip-cli \
+      #      features/src/vip-go-mu-plugins
       - name: Find and Replace dependencies
         uses: jacobtomlinson/gha-find-replace@master
         with:
