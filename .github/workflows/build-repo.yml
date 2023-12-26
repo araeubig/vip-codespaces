@@ -15,12 +15,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Clean secret management files
-        run: |
-          rm -rf \
-            images/src/alpine-base/.devcontainer.json \
-            features/src/vip-cli \
-            features/src/vip-go-mu-plugins
+      # - name: Clean secret management files
+      #   run: |
+      #     rm -rf \
+      #       images/src/alpine-base/.devcontainer.json \
+      #       features/src/vip-cli \
+      #       features/src/vip-go-mu-plugins
       - name: Find and Replace dependencies
         uses: jacobtomlinson/gha-find-replace@master
         with:
@@ -28,54 +28,54 @@ jobs:
           replace: "./features/"
           include: "features/src/**"
 
-      - name: Find and Replace VIP
-        uses: jacobtomlinson/gha-find-replace@master
-        with:
-          find: "VIP "
-          replace: "WP "
-          include: "features/src/**"
+      # - name: Find and Replace VIP
+      #   uses: jacobtomlinson/gha-find-replace@master
+      #   with:
+      #     find: "VIP "
+      #     replace: "WP "
+      #     include: "features/src/**"
 
-      - name: Find and Replace vip-codespaces folder
-        uses: jacobtomlinson/gha-find-replace@master
-        with:
-          find: "vip-codespaces"
-          replace: "wp-codespaces"
-          include: "features/src/**"
+      # - name: Find and Replace vip-codespaces folder
+      #   uses: jacobtomlinson/gha-find-replace@master
+      #   with:
+      #     find: "vip-codespaces"
+      #     replace: "wp-codespaces"
+      #     include: "features/src/**"
           
-      - name: Find and Replace dependencies of vip-go-mu-plugins
-        uses: jacobtomlinson/gha-find-replace@master
-        with:
-          find: "vip-go-mu-plugins"
-          replace: "mu-plugins"
-          include: "features/src/**"
+      # - name: Find and Replace dependencies of vip-go-mu-plugins
+      #   uses: jacobtomlinson/gha-find-replace@master
+      #   with:
+      #     find: "vip-go-mu-plugins"
+      #     replace: "mu-plugins"
+      #     include: "features/src/**"
 
-      - name: Find and Replace "vipgo" user
-        uses: jacobtomlinson/gha-find-replace@master
-        with:
-          find: "vipgo"
-          replace: "admin"
-          include: "features/src/**"
+      # - name: Find and Replace "vipgo" user
+      #   uses: jacobtomlinson/gha-find-replace@master
+      #   with:
+      #     find: "vipgo"
+      #     replace: "admin"
+      #     include: "features/src/**"
           
-      - name: Find and Replace "@go-vip.net" domain
-        uses: jacobtomlinson/gha-find-replace@master
-        with:
-          find: "@go-vip.net"
-          replace: "@localhost.local"
-          include: "features/src/**"
+      # - name: Find and Replace "@go-vip.net" domain
+      #   uses: jacobtomlinson/gha-find-replace@master
+      #   with:
+      #     find: "@go-vip.net"
+      #     replace: "@localhost.local"
+      #     include: "features/src/**"
 
-      - name: Find and Replace "@go-vip.net" domain
-        uses: jacobtomlinson/gha-find-replace@master
-        with:
-          find: "for i in client-mu-plugins images languages plugins themes vip-config; do"
-          replace: "for i in user-mu-plugins images languages plugins themes user-config; do"
-          include: "features/src/wordpress/**"
+      # - name: Find and Replace "@go-vip.net" domain
+      #   uses: jacobtomlinson/gha-find-replace@master
+      #   with:
+      #     find: "for i in client-mu-plugins images languages plugins themes vip-config; do"
+      #     replace: "for i in user-mu-plugins images languages plugins themes user-config; do"
+      #     include: "features/src/wordpress/**"
 
-      - name: Find and Replace wordpress title
-        uses: jacobtomlinson/gha-find-replace@master
-        with:
-          find: "WordPress VIP Development Site"
-          replace: "WordPress Dev"
-          include: "features/src/wordpress/**"
+      # - name: Find and Replace wordpress title
+      #   uses: jacobtomlinson/gha-find-replace@master
+      #   with:
+      #     find: "WordPress VIP Development Site"
+      #     replace: "WordPress Dev"
+      #     include: "features/src/wordpress/**"
           
       - name: Push base image to another repository
         uses: cpina/github-action-push-to-another-repository@main
