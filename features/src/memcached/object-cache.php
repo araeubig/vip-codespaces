@@ -1,34 +1,10 @@
 <?php
- 
-/*
-Plugin Name: Memcached
-Description: Memcached backend for the WP Object Cache.
-Version: 3.2.2
-Plugin URI: http://wordpress.org/extend/plugins/memcached/
-Author: Automattic
- 
-Install this file to wp-content/object-cache.php
-*/
- 
-define( 'VIP_OBJECT_CACHE_DROPIN_STABLE', __DIR__ .'/object-cache-stable.php' );
-define( 'VIP_OBJECT_CACHE_DROPIN_NEXT', __DIR__ .'/object-cache-next.php' );
 
-// Add environment names to this array to switch them to object-cache-next.php
-if ( ! defined( 'VIP_USE_NEXT_OBJECT_CACHE_DROPIN' ) ) {
-	if ( in_array( VIP_GO_APP_ENVIRONMENT, [
-	], true ) ) {
-		define( 'VIP_USE_NEXT_OBJECT_CACHE_DROPIN', true );
-	}
+if ( file_exists( __DIR__ . '/mu-plugins/drop-ins/object-cache.php' ) ) {
+	require_once __DIR__ . '/mu-plugins/drop-ins/object-cache.php';
 }
 
-// If site is testing next version of object cache dropin, load it
-if ( defined( 'VIP_USE_NEXT_OBJECT_CACHE_DROPIN' ) && true === VIP_USE_NEXT_OBJECT_CACHE_DROPIN && is_readable( VIP_OBJECT_CACHE_DROPIN_NEXT ) ) {
-	require_once( VIP_OBJECT_CACHE_DROPIN_NEXT );
-} else {
-	// Else, load stable cache dropin (default)
-	require_once( VIP_OBJECT_CACHE_DROPIN_STABLE );
-}
-
-if ( file_exists( ABSPATH . '/wp-content/mu-plugins/lib/class-apc-cache-interceptor.php' ) ) {
-	require_once( ABSPATH . '/wp-content/mu-plugins/lib/class-apc-cache-interceptor.php' );
-}
+// We are not loading `../wp-includes/cache.php` as a fallback because `wp_start_object_cache()` does that for us.
+// If we load it here, `wp_using_ext_object_cache()` will return `true`; this may cause unwated side effects.
+// It is, however, still possible that `wp_using_ext_object_cache()` returns `true`; that happens if `advanced-cache.php`
+// loads `object-cache.php` before `wp_start_object_cache()` is called. However, this must not happen in a VIP environment.

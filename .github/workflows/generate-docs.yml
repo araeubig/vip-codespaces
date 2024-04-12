@@ -1,0 +1,42 @@
+name: Generate docs
+
+on:
+  push:
+    branches:
+      - trunk
+    paths:
+      - 'features/src/**/devcontainer-feature.json'
+      - 'features/src/**/NOTES.md'
+      - '.github/workflows/generate-docs.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  generate-feature-docs:
+    name: Generate documentation for features
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+  
+      - name: Generate documentation
+        uses: devcontainers/action@v1.4.2
+        with:
+          generate-docs: true
+          base-path-to-features: ./features/src
+
+      - name: Create a PR for documentation
+        uses: peter-evans/create-pull-request@v6.0.2
+        with:
+          add-paths: ':(glob)features/src/**/README.md'
+          commit-message: 'docs: automated documentation update'
+          title: 'docs: automated documentation update'
+          body: 'Update documentation for features'
+          labels: docs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

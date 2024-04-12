@@ -18,7 +18,7 @@ jobs:
       images: ${{ steps.set-matrix.outputs.images }}
     steps:
       - name: Check out the repo
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
 
       - name: Set matrix
         id: set-matrix
@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
         with:
           fetch-depth: 0
 
@@ -63,6 +63,16 @@ jobs:
         run: npm install -g @devcontainers/cli
         if: steps.changes.outputs.needs_build == 'true'
 
+      - name: Expose GitHub Runtime
+        uses: Automattic/vip-actions/expose-github-runtime@trunk
+        if: steps.changes.outputs.needs_build == 'true'
+
       - name: Build image
-        run: devcontainer build --workspace-folder "images/src/${{ matrix.image.image-name }}" --platform linux/amd64,linux/arm64 --output type=image
+        run: |
+          devcontainer build \
+            --workspace-folder "images/src/${{ matrix.image.image-name }}" \
+            --platform linux/amd64,linux/arm64 \
+            --output type=image \
+            --cache-from type=gha \
+            --cache-to type=gha,mode=max
         if: steps.changes.outputs.needs_build == 'true'
