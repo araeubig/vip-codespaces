@@ -24,9 +24,9 @@ jobs:
             features/src/dev-tools \
             features/src/**/*.md
 
-      - name: Rename wordpress directory
-        run: |
-          mv features/src/wordpress features/src/wordpress_org
+      # - name: Rename wordpress directory
+      #   run: |
+      #     mv features/src/wordpress features/src/wordpress_org
 
       - name: Find and Replace dependencies
         uses: jacobtomlinson/gha-find-replace@master
