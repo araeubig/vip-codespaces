@@ -33,7 +33,7 @@ jobs:
         uses: jacobtomlinson/gha-find-replace@master
         with:
           find: "VIP "
-          replace: "WP "
+          replace: "WP  "
           include: "features/src/**"
 
       - name: Find and Replace https://docs.wpvip.com/technical-references/developing-with-github-codespaces/
