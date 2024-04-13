@@ -20,7 +20,8 @@ jobs:
           rm -rf \
             images/src/alpine-base/.devcontainer.json \
             features/src/vip-cli \
-            features/src/vip-go-mu-plugins
+            features/src/vip-go-mu-plugins \
+            features/src/dev-tools
       - name: Find and Replace dependencies
         uses: jacobtomlinson/gha-find-replace@master
         with:
@@ -33,6 +34,13 @@ jobs:
         with:
           find: "VIP "
           replace: "WP "
+          include: "features/src/**"
+
+      - name: Find and Replace https://docs.wpvip.com/technical-references/developing-with-github-codespaces/
+        uses: jacobtomlinson/gha-find-replace@master
+        with:
+          find: "https://docs.wpvip.com/technical-references/developing-with-github-codespaces/"
+          replace: "https://test.com"
           include: "features/src/**"
 
       - name: Find and Replace vip-codespaces folder
