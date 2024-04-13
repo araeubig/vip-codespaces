@@ -21,7 +21,7 @@ jobs:
             images/src/alpine-base/.devcontainer.json \
             features/src/vip-cli \
             features/src/vip-go-mu-plugins \
-            features/src/dev-tools
+            features/src/dev-tools \
             features/src/**/*.md
       - name: Find and Replace dependencies
         uses: jacobtomlinson/gha-find-replace@master
