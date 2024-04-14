@@ -21,9 +21,9 @@ jobs:
             images/src/alpine-base/.devcontainer.json \
             features/src/**/*.md
 
-      # - name: Rename wordpress directory
-      #   run: |
-      #     mv features/src/wordpress features/src/wordpress_org
+      - name: Copy wordpress directory
+        run: |
+          cp -r features/src/wordpress features/src/wordpress_org/
 
       - name: Find and Replace dependencies
         uses: jacobtomlinson/gha-find-replace@master
