@@ -77,19 +77,19 @@ jobs:
       #     replace: "mu-plugins"
       #     include: "features/src/**"
 
-      # - name: Find and Replace "vipgo" user
-      #   uses: jacobtomlinson/gha-find-replace@master
-      #   with:
-      #     find: "vipgo"
-      #     replace: "admin"
-      #     include: "features/src/**"
+      - name: Find and Replace "vipgo" user
+        uses: jacobtomlinson/gha-find-replace@master
+        with:
+          find: "vipgo"
+          replace: "admin"
+          include: "features/src/**"
           
-      # - name: Find and Replace "@go-vip.net" domain
-      #   uses: jacobtomlinson/gha-find-replace@master
-      #   with:
-      #     find: "@go-vip.net"
-      #     replace: "@localhost.local"
-      #     include: "features/src/**"
+      - name: Find and Replace "@go-vip.net" domain
+        uses: jacobtomlinson/gha-find-replace@master
+        with:
+          find: "vip@localhost.local"
+          replace: "admin@localhost.local"
+          include: "features/src/**"
 
       # - name: Find and Replace "@go-vip.net" domain
       #   uses: jacobtomlinson/gha-find-replace@master
