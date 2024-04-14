@@ -35,40 +35,40 @@ jobs:
           replace: "./features/"
           include: "features/src/**"
 
-      - name: Find and Replace VIP
-        uses: jacobtomlinson/gha-find-replace@master
-        with:
-          find: "VIP "
-          replace: "WP  "
-          include: "features/src/**"
+      # - name: Find and Replace VIP
+      #   uses: jacobtomlinson/gha-find-replace@master
+      #   with:
+      #     find: "VIP "
+      #     replace: "WP  "
+      #     include: "features/src/**"
 
-      - name: Find and Replace https://docs.wpvip.com/technical-references/developing-with-github-codespaces/
-        uses: jacobtomlinson/gha-find-replace@master
-        with:
-          find: "https://docs.wpvip.com/technical-references/developing-with-github-codespaces/"
-          replace: "https://test.com"
-          include: "features/src/**"
+      # - name: Find and Replace https://docs.wpvip.com/technical-references/developing-with-github-codespaces/
+      #   uses: jacobtomlinson/gha-find-replace@master
+      #   with:
+      #     find: "https://docs.wpvip.com/technical-references/developing-with-github-codespaces/"
+      #     replace: "https://test.com"
+      #     include: "features/src/**"
 
-      - name: Find and Replace vip-codespaces folder
-        uses: jacobtomlinson/gha-find-replace@master
-        with:
-          find: "vip-codespaces"
-          replace: "wp-codespaces"
-          include: "features/src/**"
+      # - name: Find and Replace vip-codespaces folder
+      #   uses: jacobtomlinson/gha-find-replace@master
+      #   with:
+      #     find: "vip-codespaces"
+      #     replace: "wp-codespaces"
+      #     include: "features/src/**"
           
-      - name: Find and Replace dependencies of vip-go-mu-plugins
-        uses: jacobtomlinson/gha-find-replace@master
-        with:
-          find: "vip-go-mu-plugins"
-          replace: "mu-plugins"
-          include: "features/src/**"
+      # - name: Find and Replace dependencies of vip-go-mu-plugins
+      #   uses: jacobtomlinson/gha-find-replace@master
+      #   with:
+      #     find: "vip-go-mu-plugins"
+      #     replace: "mu-plugins"
+      #     include: "features/src/**"
 
-      - name: Find and Replace "vipgo" user
-        uses: jacobtomlinson/gha-find-replace@master
-        with:
-          find: "vipgo"
-          replace: "admin"
-          include: "features/src/**"
+      # - name: Find and Replace "vipgo" user
+      #   uses: jacobtomlinson/gha-find-replace@master
+      #   with:
+      #     find: "vipgo"
+      #     replace: "admin"
+      #     include: "features/src/**"
           
       # - name: Find and Replace "@go-vip.net" domain
       #   uses: jacobtomlinson/gha-find-replace@master
