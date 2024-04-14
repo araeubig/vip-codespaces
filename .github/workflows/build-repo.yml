@@ -49,12 +49,12 @@ jobs:
       #     replace: "https://test.com"
       #     include: "features/src/**"
 
-      # - name: Find and Replace vip-codespaces folder
-      #   uses: jacobtomlinson/gha-find-replace@master
-      #   with:
-      #     find: "vip-codespaces"
-      #     replace: "wp-codespaces"
-      #     include: "features/src/**"
+      - name: Find and Replace vip-codespaces folder
+        uses: jacobtomlinson/gha-find-replace@master
+        with:
+          find: "vip-codespaces"
+          replace: "wp-codespaces"
+          include: "features/src/**"
           
       # - name: Find and Replace dependencies of vip-go-mu-plugins
       #   uses: jacobtomlinson/gha-find-replace@master
