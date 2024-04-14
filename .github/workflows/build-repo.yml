@@ -19,7 +19,6 @@ jobs:
         run: |
           rm -rf \
             images/src/alpine-base/.devcontainer.json \
-            features/src/vip-cli \
             features/src/**/*.md
 
       # - name: Rename wordpress directory
