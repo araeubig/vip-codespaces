@@ -55,6 +55,13 @@ jobs:
           find: "vip-codespaces"
           replace: "wp-codespaces"
           include: "features/src/**"
+
+      - name: Find and Replace "VIP Codespaces"
+        uses: jacobtomlinson/gha-find-replace@master
+        with:
+          find: "VIP Codespaces"
+          replace: "WP Codespaces"
+          include: "features/src/**"
           
       # - name: Find and Replace dependencies of vip-go-mu-plugins
       #   uses: jacobtomlinson/gha-find-replace@master
