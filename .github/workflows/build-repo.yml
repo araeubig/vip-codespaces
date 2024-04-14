@@ -56,6 +56,13 @@ jobs:
           replace: "wp-codespaces"
           include: "features/src/**"
 
+      # - name: Find and Replace dependencies of vip-go-mu-plugins
+      #   uses: jacobtomlinson/gha-find-replace@master
+      #   with:
+      #     find: "vip-go-mu-plugins"
+      #     replace: "mu-plugins"
+      #     include: "features/src/**"
+
       - name: Find and Replace "VIP Codespaces"
         uses: jacobtomlinson/gha-find-replace@master
         with:
@@ -69,13 +76,6 @@ jobs:
           find: "WordPress WP Codespaces!"
           replace: "WordPress Codespaces!    "
           include: "features/src/**"
-          
-      # - name: Find and Replace dependencies of vip-go-mu-plugins
-      #   uses: jacobtomlinson/gha-find-replace@master
-      #   with:
-      #     find: "vip-go-mu-plugins"
-      #     replace: "mu-plugins"
-      #     include: "features/src/**"
 
       - name: Find and Replace "vipgo" user
         uses: jacobtomlinson/gha-find-replace@master
@@ -91,19 +91,12 @@ jobs:
           replace: "admin@localhost.local"
           include: "features/src/**"
 
-      # - name: Find and Replace "@go-vip.net" domain
-      #   uses: jacobtomlinson/gha-find-replace@master
-      #   with:
-      #     find: "for i in client-mu-plugins images languages plugins themes vip-config; do"
-      #     replace: "for i in user-mu-plugins images languages plugins themes user-config; do"
-      #     include: "features/src/wordpress/**"
-
-      # - name: Find and Replace wordpress title
-      #   uses: jacobtomlinson/gha-find-replace@master
-      #   with:
-      #     find: "WordPress VIP Development Site"
-      #     replace: "WordPress Dev"
-      #     include: "features/src/wordpress/**"
+      - name: Find and Replace "WordPress VIP Development Site" domain
+        uses: jacobtomlinson/gha-find-replace@master
+        with:
+          find: "WordPress VIP Development Site"
+          replace: "WordPress Development Site"
+          include: "features/src/**"
           
       - name: Push base image to another repository
         uses: cpina/github-action-push-to-another-repository@main
