@@ -103,7 +103,7 @@ jobs:
           source-directory: 'images/src/alpine-base'
           target-directory: '.devcontainer'
           destination-github-username: 'araeubig'
-          destination-repository-name: 'Dev-Env'
+          destination-repository-name: 'WP-Dev-Env'
           user-email: amr@bild-werk-statt.ch
           target-branch: base
           
@@ -115,6 +115,6 @@ jobs:
           source-directory: 'features/src'
           target-directory: '.devcontainer/features'
           destination-github-username: 'araeubig'
-          destination-repository-name: 'Dev-Env'
+          destination-repository-name: 'WP-Dev-Env'
           user-email: amr@bild-werk-statt.ch
           target-branch: base
