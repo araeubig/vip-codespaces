@@ -7,7 +7,7 @@ Provides su-exec for running commands as another user
 
 ```json
 "features": {
-    "ghcr.io/Automattic/vip-codespaces/su-exec:1": {}
+    "ghcr.io/araeubig/vip-codespaces/su-exec:1": {}
 }
 ```
 
@@ -17,4 +17,4 @@ Provides su-exec for running commands as another user
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/Automattic/vip-codespaces/blob/main/features/src/su-exec/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/araeubig/vip-codespaces/blob/main/features/src/su-exec/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._

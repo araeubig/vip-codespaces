@@ -7,7 +7,7 @@ Sets up WordPress into the Dev Environment
 
 ```json
 "features": {
-    "ghcr.io/Automattic/vip-codespaces/wordpress:2": {}
+    "ghcr.io/araeubig/vip-codespaces/wordpress:2": {}
 }
 ```
 
@@ -25,4 +25,4 @@ Sets up WordPress into the Dev Environment
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/Automattic/vip-codespaces/blob/main/features/src/wordpress/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/araeubig/vip-codespaces/blob/main/features/src/wordpress/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
