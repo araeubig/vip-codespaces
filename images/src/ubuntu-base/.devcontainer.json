@@ -9,7 +9,7 @@
     "x-build": {
         "name": "Ubuntu",
         "image-name": "ubuntu-base",
-        "image-version": "0.0.1"
+        "image-version": "0.0.2"
     },
     "remoteUser": "vscode",
     "remoteEnv": {
