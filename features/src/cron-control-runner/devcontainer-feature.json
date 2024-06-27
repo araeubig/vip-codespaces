@@ -1,0 +1,37 @@
+{
+    "id": "cron-control-runner",
+    "name": "Cron Control Runner",
+    "version": "1.0.1",
+    "description": "Installs Cron Control Runner into the Dev Environment",
+    "options": {
+        "enabled": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether to install Cron Control Runner"
+        },
+        "fpm-socket": {
+            "type": "string",
+            "default": "tcp://127.0.0.1:9000",
+            "description": "Address of the PHP-FPM socket. If not set, WP CLI will be used to run the cron jobs (slower)."
+        },
+        "wordpress-path": {
+            "type": "string",
+            "default": "/wp",
+            "description": "Path to the WordPress installation"
+        },
+        "wp-cli-path": {
+            "type": "string",
+            "default": "/usr/local/bin/wp",
+            "description": "Path to the WP CLI binary; required if `fpm-socket` is not set"
+        },
+        "install-runit-service": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether to install a runit service for the Cron Control Runner"
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/automattic/vip-codespaces/entrypoints",
+        "ghcr.io/automattic/vip-codespaces/wp-cli"
+    ]
+}

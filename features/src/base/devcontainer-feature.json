@@ -1,10 +1,11 @@
 {
     "id": "base",
     "name": "VIP Codespaces Base",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "description": "Base feature for VIP Codespaces",
     "containerEnv": {
-        "PAGER": "\"/usr/bin/less -R\""
+        "PAGER": "\"/usr/bin/less -R\"",
+        "LD_PRELOAD": "/usr/lib/libeatmydata/libeatmydata.so"
     },
     "customizations": {
         "vscode": {

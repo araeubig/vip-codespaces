@@ -1,7 +1,7 @@
 {
     "id": "wp-cli",
     "name": "WP CLI",
-    "version": "1.1.1",
+    "version": "1.1.3",
     "description": "Sets up wp-cli in the devcontainer",
     "options": {
         "nightly": {

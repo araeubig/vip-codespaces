@@ -1,0 +1,98 @@
+{
+    "alpine-base": {
+        "image": "ghcr.io/automattic/vip-codespaces/alpine-base:latest",
+        "overrideCommand": false,
+        "features": {
+            "php": {
+                "composer": false,
+                "lite-install": true,
+                "skip-gmagick": true
+            },
+            "mariadb": {},
+            "wp-cli": {},
+            "wordpress": {},
+            "nginx": {}
+        },
+        "overrideFeatureInstallOrder": [
+            "./php",
+            "./nginx",
+            "./wp-cli",
+            "./mariadb",
+            "./wordpress"
+        ]
+    },
+    "alpine-base-persist": {
+        "image": "ghcr.io/automattic/vip-codespaces/alpine-base:latest",
+        "overrideCommand": false,
+        "features": {
+            "php": {
+                "composer": false,
+                "lite-install": true,
+                "skip-gmagick": true
+            },
+            "mariadb": {
+                "installDatabaseToWorkspaces": true
+            },
+            "wp-cli": {},
+            "wordpress": {
+                "moveUploadsToWorkspaces": true
+            },
+            "nginx": {}
+        },
+        "overrideFeatureInstallOrder": [
+            "./php",
+            "./nginx",
+            "./wp-cli",
+            "./mariadb",
+            "./wordpress"
+        ]
+    },
+    "ubuntu-base": {
+        "image": "ghcr.io/automattic/vip-codespaces/ubuntu-base:latest",
+        "overrideCommand": false,
+        "features": {
+            "php": {
+                "composer": false,
+                "lite-install": true,
+                "skip-gmagick": true
+            },
+            "mariadb": {},
+            "wp-cli": {},
+            "wordpress": {},
+            "nginx": {}
+        },
+        "overrideFeatureInstallOrder": [
+            "./php",
+            "./nginx",
+            "./wp-cli",
+            "./mariadb",
+            "./wordpress"
+        ]
+    },
+    "ubuntu-base-persist": {
+        "image": "ghcr.io/automattic/vip-codespaces/ubuntu-base:latest",
+        "overrideCommand": false,
+        "features": {
+            "php": {
+                "composer": false,
+                "lite-install": true,
+                "skip-gmagick": true
+            },
+            "mariadb": {
+                "installDatabaseToWorkspaces": true
+            },
+            "wp-cli": {},
+            "wordpress": {
+                "moveUploadsToWorkspaces": true
+            },
+            "nginx": {}
+        },
+        "overrideFeatureInstallOrder": [
+            "./php",
+            "./nginx",
+            "./wp-cli",
+            "./mariadb",
+            "./wordpress"
+        ]
+    }
+}

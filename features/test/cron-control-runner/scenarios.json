@@ -1,0 +1,50 @@
+{
+    "alpine-base": {
+        "image": "ghcr.io/automattic/vip-codespaces/alpine-base:latest",
+        "overrideCommand": false,
+        "features": {
+            "php": {
+                "composer": false,
+                "lite-install": true,
+                "skip-gmagick": true
+            },
+            "wp-cli": {},
+            "mariadb": {},
+            "wordpress": {},
+            "vip-go-mu-plugins": {},
+            "cron-control-runner": {}
+        },
+        "overrideFeatureInstallOrder": [
+            "./php",
+            "./wp-cli",
+            "./mariadb",
+            "./wordpress",
+            "./vip-go-mu-plugins",
+            "./cron-control-runner"
+        ]
+    },
+    "ubuntu-base": {
+        "image": "ghcr.io/automattic/vip-codespaces/ubuntu-base:latest",
+        "overrideCommand": false,
+        "features": {
+            "php": {
+                "composer": false,
+                "lite-install": true,
+                "skip-gmagick": true
+            },
+            "wp-cli": {},
+            "mariadb": {},
+            "wordpress": {},
+            "vip-go-mu-plugins": {},
+            "cron-control-runner": {}
+        },
+        "overrideFeatureInstallOrder": [
+            "./php",
+            "./wp-cli",
+            "./mariadb",
+            "./wordpress",
+            "./vip-go-mu-plugins",
+            "./cron-control-runner"
+        ]
+    }
+}

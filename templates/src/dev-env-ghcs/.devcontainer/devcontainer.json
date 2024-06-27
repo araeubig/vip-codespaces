@@ -75,8 +75,8 @@
             "enabled": "${templateOption:vipCliEnabled}"
         },
         // Tools
-        "ghcr.io/automattic/vip-codespaces/mailhog:latest": {
-            "enabled": "${templateOption:mailhogEnabled}"
+        "ghcr.io/automattic/vip-codespaces/mailpit:latest": {
+            "enabled": "${templateOption:mailpitEnabled}"
         },
         "ghcr.io/automattic/vip-codespaces/phpmyadmin:latest": {
             "enabled": "${templateOption:pmaEnabled}"

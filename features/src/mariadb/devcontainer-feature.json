@@ -1,16 +1,26 @@
 {
     "name": "MariaDB",
     "id": "mariadb",
-    "version": "1.0.3",
+    "version": "1.3.0",
     "description": "Sets up MariaDB into the Dev Environment",
     "options": {
         "installDatabaseToWorkspaces": {
             "type": "boolean",
             "default": false,
             "description": "Set MariaDB data directory to /workspaces/mysql-data to persist data between container rebuilds (GHCS)"
+        },
+        "extra-options": {
+            "type": "string",
+            "default": "",
+            "description": "Extra options to pass to the MariaDB server"
+        },
+        "install-runit-service": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether to install a runit service for Mailpit"
         }
     },
     "installsAfter": [
-        "ghcr.io/automattic/vip-codespaces/base"
+        "ghcr.io/automattic/vip-codespaces/entrypoints"
     ]
 }

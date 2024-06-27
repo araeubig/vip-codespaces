@@ -1,0 +1,72 @@
+{
+    "alpine-base": {
+        "image": "ghcr.io/automattic/vip-codespaces/alpine-base:latest",
+        "overrideCommand": false,
+        "features": {
+            "nginx": {},
+            "php": {
+                "composer": false,
+                "lite-install": true
+            },
+            "photon": {
+                "enabled": true,
+                "disable_optimizations": false
+            }
+        },
+        "overrideFeatureInstallOrder": [
+            "./php",
+            "./nginx",
+            "./photon"
+        ]
+    },
+    "ubuntu-base": {
+        "image": "ghcr.io/automattic/vip-codespaces/ubuntu-base:latest",
+        "overrideCommand": false,
+        "features": {
+            "nginx": {},
+            "php": {
+                "composer": false,
+                "lite-install": true
+            },
+            "photon": {
+                "enabled": true,
+                "disable_optimizations": false
+            }
+        },
+        "overrideFeatureInstallOrder": [
+            "./php",
+            "./nginx",
+            "./photon"
+        ]
+    },
+    "debian-latest": {
+        "image": "debian:bookworm-slim",
+        "features": {
+            "photon": {
+                "enabled": true
+            }
+        }
+    },
+    "media-redirect": {
+        "image": "ghcr.io/automattic/vip-codespaces/alpine-base:latest",
+        "overrideCommand": false,
+        "features": {
+            "nginx": {
+                "mediaRedirectURL": "http://local.invalid"
+            },
+            "php": {
+                "composer": false,
+                "lite-install": true
+            },
+            "photon": {
+                "enabled": true,
+                "disable_optimizations": false
+            }
+        },
+        "overrideFeatureInstallOrder": [
+            "./php",
+            "./nginx",
+            "./photon"
+        ]
+    }
+}

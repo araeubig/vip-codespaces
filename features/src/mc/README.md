@@ -15,7 +15,7 @@ Installs Midnight Commander into the Dev Environment
 
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
-| enabled | Install Midnight Commander | boolean | false |
+| enabled | Install Midnight Commander | boolean | true |
 
 
 

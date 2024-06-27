@@ -1,0 +1,42 @@
+{
+    "alpine-base": {
+        "image": "ghcr.io/automattic/vip-codespaces/alpine-base:latest",
+        "overrideCommand": false,
+        "features": {
+            "memcached": {}
+        }
+    },
+    "ubuntu-base": {
+        "image": "ghcr.io/automattic/vip-codespaces/ubuntu-base:latest",
+        "overrideCommand": false,
+        "features": {
+            "memcached": {}
+        }
+    },
+    "ubuntu-mcr": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "entrypoints": {},
+            "memcached": {
+                "install-runit-service": false
+            }
+        },
+        "overrideFeatureInstallOrder": [
+            "./entrypoints",
+            "./memcached"
+        ]
+    },
+    "alpine-mcr": {
+        "image": "mcr.microsoft.com/devcontainers/base:alpine",
+        "features": {
+            "entrypoints": {},
+            "memcached": {
+                "install-runit-service": false
+            }
+        },
+        "overrideFeatureInstallOrder": [
+            "./entrypoints",
+            "./memcached"
+        ]
+    }
+}

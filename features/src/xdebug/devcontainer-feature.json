@@ -1,13 +1,13 @@
 {
     "name": "Xdebug",
     "id": "xdebug",
-    "version": "1.3.0",
+    "version": "1.4.1",
     "description": "Configures Xdebug for the Dev Environment",
     "options": {
         "enabled": {
             "type": "boolean",
             "default": false,
-            "description": "Enable Xdebug feature"
+            "description": "Whether to enable Xdebug (`false` is equivalent to setting `mode` to `off`)"
         },
         "mode": {
             "type": "string",

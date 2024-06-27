@@ -1,12 +1,12 @@
 {
     "id": "dev-env-ghcs",
     "name": "VIP Development Environment",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "options": {
-        "mailhogEnabled": {
+        "mailpitEnabled": {
             "type": "boolean",
             "default": false,
-            "description": "Enable Mailhog"
+            "description": "Enable Mailpit"
         },
         "memcachedEnabled": {
             "type": "boolean",
@@ -15,8 +15,8 @@
         },
         "phpVersion": {
             "type": "string",
-            "enum": ["8.0", "8.1", "8.2"],
-            "default": "8.0",
+            "enum": ["8.1", "8.2", "8.3"],
+            "default": "8.2",
             "description": "PHP version"
         },
         "wordpressVersion": {

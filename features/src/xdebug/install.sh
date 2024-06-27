@@ -4,16 +4,47 @@ set -e
 
 PATH=/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin
 
-xdebug_81() {
-    apk add --no-cache php81-pecl-xdebug
+get_php_version() {
+    if [ -f /etc/dev-env-features/php ]; then
+        cat /etc/dev-env-features/php
+    else
+        php -r 'echo PHP_MAJOR_VERSION, ".", PHP_MINOR_VERSION;'
+    fi
 }
 
-xdebug_82() {
+xdebug_81_alpine() {
+    alpine_version="$(cat /etc/alpine-release)"
+    if [ "$(printf '%s\n' "3.20" "${alpine_version}" | sort -V | head -n1 || true)" = "3.20" ]; then
+        REPOS="-X https://dl-cdn.alpinelinux.org/alpine/v3.19/main -X https://dl-cdn.alpinelinux.org/alpine/v3.19/community"
+    else
+        REPOS=""
+    fi
+
+    # shellcheck disable=SC2086 # We need to expand $REPOS
+    apk add --no-cache php81-pecl-xdebug ${REPOS}
+    rm -f /etc/php81/conf.d/50_xdebug.ini
+}
+
+xdebug_82_alpine() {
     apk add --no-cache php82-pecl-xdebug
+    rm -f /etc/php81/conf.d/50_xdebug.ini
 }
 
-xdebug_83() {
+xdebug_83_alpine() {
     apk add --no-cache php83-pecl-xdebug
+    rm -f /etc/php81/conf.d/50_xdebug.ini
+}
+
+xdebug_81_deb() {
+    apt-get install -y --no-install-recommends php8.1-xdebug
+}
+
+xdebug_82_deb() {
+    apt-get install -y --no-install-recommends php8.2-xdebug
+}
+
+xdebug_83_deb() {
+    apt-get install -y --no-install-recommends php8.3-xdebug
 }
 
 if [ "$(id -u || true)" -ne 0 ]; then
@@ -22,56 +53,84 @@ if [ "$(id -u || true)" -ne 0 ]; then
 fi
 
 : "${ENABLED:=}"
+: "${MODE:=debug}"
 
-if [ "${ENABLED}" = "true" ]; then
-    echo '(*) Installing Xdebug...'
-    : MODE="${MODE:-debug}"
-    if [ -f /etc/profile.d/php_ini_dir.sh ]; then
-        # shellcheck source=/dev/null
-        . /etc/profile.d/php_ini_dir.sh
-    fi
-    DIR=${PHP_INI_DIR:-/etc/php}
-
-    if [ ! -d "${DIR}/conf.d" ]; then
-        echo "(!) Unable to find out PHP configuration directory."
-        exit 1
-    fi
-
-    if [ ! -f /etc/dev-env-features/php ]; then
-        if apk list --installed php8 2>/dev/null; then
-            version="8.0"
-        elif apk list --installed php81 2>/dev/null; then
-            version="8.1"
-        elif apk list --installed php82 2>/dev/null; then
-            version="8.2"
-        elif apk list --installed php83 2>/dev/null; then
-            version="8.3"
-        else
-            echo "(!) Unable to find out PHP version."
-            exit 1
-        fi
-    else
-        version=$(cat /etc/dev-env-features/php)
-    fi
-
-    case "${version}" in
-        8.0|8.1)
-            xdebug_81
-        ;;
-        8.2)
-            xdebug_82
-        ;;
-        8.3)
-            xdebug_83
-        ;;
-        *)
-            echo "(!) Unsupported PHP version: ${version}"
-            exit 1
-        ;;
-    esac
-
-    sed "s/^xdebug\\.mode.*\$/xdebug.mode = ${MODE}/" xdebug.ini > "${DIR}/conf.d/xdebug.ini"
-    install -m 0755 xdebug-disable xdebug-set-mode /usr/local/bin
-
-    echo 'Done!'
+if [ "${ENABLED}" != "true" ]; then
+    MODE=off
 fi
+
+echo '(*) Installing Xdebug...'
+
+# shellcheck source=/dev/null
+. /etc/os-release
+
+: "${ID:=}"
+: "${ID_LIKE:=${ID}}"
+
+PHP_VERSION=$(get_php_version)
+PHP_INI_DIR=
+NEED_ENMOD=
+SUFFIX=
+
+case "${ID_LIKE}" in
+    debian)
+        export DEBIAN_FRONTEND=noninteractive
+        apt-get update
+        case "${PHP_VERSION}" in
+            8.1)
+                xdebug_81_deb
+            ;;
+            8.2)
+                xdebug_82_deb
+            ;;
+            8.3)
+                xdebug_83_deb
+            ;;
+            *)
+                echo "(!) Unsupported PHP version: ${PHP_VERSION}"
+                exit 1
+            ;;
+        esac
+        PHP_INI_DIR="/etc/php/${PHP_VERSION}/mods-available"
+        NEED_ENMOD=1
+        SUFFIX=.debian
+        apt-get clean
+        rm -rf /var/lib/apt/lists/*
+    ;;
+
+    alpine)
+        case "${PHP_VERSION}" in
+            8.1)
+                xdebug_81_alpine
+            ;;
+            8.2)
+                xdebug_82_alpine
+            ;;
+            8.3)
+                xdebug_83_alpine
+            ;;
+            *)
+                echo "(!) Unsupported PHP version: ${PHP_VERSION}"
+                exit 1
+            ;;
+        esac
+        VER="$(echo "${PHP_VERSION}" | tr -d '.')"
+        PHP_INI_DIR="/etc/php${VER}/conf.d"
+        SUFFIX=.alpine
+    ;;
+
+    *)
+        echo "(!) Unsupported distribution: ${ID_LIKE}"
+        exit 1
+    ;;
+esac
+
+sed "s/^xdebug\\.mode.*\$/xdebug.mode = \"${MODE}\"/" xdebug.ini > "${PHP_INI_DIR}/xdebug.ini"
+if [ -n "${NEED_ENMOD}" ]; then
+    phpenmod -v "${PHP_VERSION}" xdebug
+fi
+
+install -m 0755 xdebug-disable /usr/local/bin
+install -m 0755 "xdebug-set-mode${SUFFIX}" /usr/local/bin/xdebug-set-mode
+
+echo 'Done!'

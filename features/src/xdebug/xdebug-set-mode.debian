@@ -1,0 +1,30 @@
+#!/bin/sh
+
+PATH=/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin
+
+if [ "$(id -u || true)" -ne 0 ]; then
+    echo "This script must be run as root" 1>&2
+    exit 1
+fi
+
+get_php_version() {
+    if [ -f /etc/dev-env-features/php ]; then
+        cat /etc/dev-env-features/php
+    else
+        php -r 'echo PHP_MAJOR_VERSION, ".", PHP_MINOR_VERSION;'
+    fi
+}
+
+PHP_VERSION="$(get_php_version)"
+PHP_INI_DIR="/etc/php/${PHP_VERSION}/mods-available"
+
+if [ -f "${PHP_INI_DIR}/xdebug.ini" ]; then
+    mode="${1:-"debug,coverage"}"
+    sed -i "s/^xdebug\\.mode.*\$/xdebug.mode = \"${mode}\"/" "${PHP_INI_DIR}/xdebug.ini"
+    phpenmod -v "${PHP_VERSION}" xdebug
+    sv restart php-fpm
+    echo "xdebug.mode set to ${mode}"
+else
+    echo "Unable to find ${PHP_INI_DIR}/xdebug.ini"
+    exit 1
+fi

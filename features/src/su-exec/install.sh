@@ -24,6 +24,7 @@ fi
 
 case "${ID_LIKE}" in
     "debian")
+        export DEBIAN_FRONTEND=noninteractive
         PACKAGES=""
         if ! dpkg -s libc6-dev >/dev/null 2>&1; then
             PACKAGES="${PACKAGES} libc6-dev"
@@ -33,23 +34,13 @@ case "${ID_LIKE}" in
             PACKAGES="${PACKAGES} tcc"
         fi
 
-        if ! hash wget >/dev/null 2>&1; then
-            PACKAGES="${PACKAGES} wget"
-        fi
-
-        if ! hash update-ca-certificates >/dev/null 2>&1; then
-            PACKAGES="${PACKAGES} ca-certificates"
-        fi
-
         if [ -n "${PACKAGES}" ]; then
             apt-get update
             # shellcheck disable=SC2086
             apt-get install -y --no-install-recommends ${PACKAGES}
         fi
 
-        wget -q https://raw.githubusercontent.com/ncopa/su-exec/master/su-exec.c -O su-exec.c
         cc -O2 su-exec.c -o /usr/local/bin/su-exec
-        rm su-exec.c
 
         if [ -n "${PACKAGES}" ]; then
             # shellcheck disable=SC2086

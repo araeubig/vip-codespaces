@@ -16,6 +16,7 @@ Installs nginx into the Dev Environment
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
 | mediaRedirectURL | The URL to redirect for missing media files | string | - |
+| install-runit-service | Whether to install a runit service for Mailpit | boolean | true |
 
 
 

@@ -16,6 +16,8 @@ Sets up MariaDB into the Dev Environment
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
 | installDatabaseToWorkspaces | Set MariaDB data directory to /workspaces/mysql-data to persist data between container rebuilds (GHCS) | boolean | false |
+| extra-options | Extra options to pass to the MariaDB server | string | - |
+| install-runit-service | Whether to install a runit service for Mailpit | boolean | true |
 
 
 

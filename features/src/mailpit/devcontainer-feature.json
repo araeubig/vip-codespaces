@@ -2,15 +2,21 @@
     "id": "mailpit",
     "name": "Mailpit",
     "description": "Sets up Mailpit into the Dev Environment",
-    "version": "1.0.2",
+    "version": "1.2.0",
     "options": {
         "enabled": {
             "type": "boolean",
             "default": true,
             "description": "Enable Mailpit"
+        },
+        "install-runit-service": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether to install a runit service for Mailpit"
         }
     },
     "installsAfter": [
+        "ghcr.io/automattic/vip-codespaces/entrypoints",
         "ghcr.io/automattic/vip-codespaces/php"
     ]
 }

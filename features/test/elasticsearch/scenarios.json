@@ -1,0 +1,172 @@
+{
+    "alpine-base-nopersist-7": {
+        "image": "ghcr.io/automattic/vip-codespaces/alpine-base:latest",
+        "overrideCommand": false,
+        "containerEnv": {
+            "ES_JAVA_OPTS": "-Xms512m -Xmx512m"
+        },
+        "features": {
+            "elasticsearch": {
+                "version": "7.17.22"
+            }
+        }
+    },
+    "alpine-base-nopersist-8": {
+        "image": "ghcr.io/automattic/vip-codespaces/alpine-base:latest",
+        "overrideCommand": false,
+        "containerEnv": {
+            "ES_JAVA_OPTS": "-Xms512m -Xmx512m"
+        },
+        "features": {
+            "elasticsearch": {
+                "version": "8.14.1"
+            }
+        }
+    },
+    "alpine-base-persist-7": {
+        "image": "ghcr.io/automattic/vip-codespaces/alpine-base:latest",
+        "overrideCommand": false,
+        "containerEnv": {
+            "ES_JAVA_OPTS": "-Xms512m -Xmx512m"
+        },
+        "features": {
+            "elasticsearch": {
+                "version": "7.17.22",
+                "installDataToWorkspaces": true
+            }
+        }
+    },
+    "alpine-base-persist-8": {
+        "image": "ghcr.io/automattic/vip-codespaces/alpine-base:latest",
+        "overrideCommand": false,
+        "containerEnv": {
+            "ES_JAVA_OPTS": "-Xms512m -Xmx512m"
+        },
+        "features": {
+            "elasticsearch": {
+                "version": "8.14.1",
+                "installDataToWorkspaces": true
+            }
+        }
+    },
+    "ubuntu-base-nopersist-7": {
+        "image": "ghcr.io/automattic/vip-codespaces/ubuntu-base:latest",
+        "overrideCommand": false,
+        "containerEnv": {
+            "ES_JAVA_OPTS": "-Xms512m -Xmx512m"
+        },
+        "features": {
+            "elasticsearch": {
+                "version": "7.17.22"
+            }
+        }
+    },
+    "ubuntu-base-nopersist-8": {
+        "image": "ghcr.io/automattic/vip-codespaces/ubuntu-base:latest",
+        "overrideCommand": false,
+        "containerEnv": {
+            "ES_JAVA_OPTS": "-Xms512m -Xmx512m"
+        },
+        "features": {
+            "elasticsearch": {
+                "version": "8.14.1"
+            }
+        }
+    },
+    "ubuntu-base-persist-7": {
+        "image": "ghcr.io/automattic/vip-codespaces/ubuntu-base:latest",
+        "overrideCommand": false,
+        "containerEnv": {
+            "ES_JAVA_OPTS": "-Xms512m -Xmx512m"
+        },
+        "features": {
+            "elasticsearch": {
+                "version": "7.17.22",
+                "installDataToWorkspaces": true
+            }
+        }
+    },
+    "ubuntu-base-persist-8": {
+        "image": "ghcr.io/automattic/vip-codespaces/ubuntu-base:latest",
+        "overrideCommand": false,
+        "containerEnv": {
+            "ES_JAVA_OPTS": "-Xms512m -Xmx512m"
+        },
+        "features": {
+            "elasticsearch": {
+                "version": "8.14.1",
+                "installDataToWorkspaces": true
+            }
+        }
+    },
+
+    "es-7-mcr-alpine": {
+        "image": "mcr.microsoft.com/devcontainers/base:alpine",
+        "containerEnv": {
+            "ES_JAVA_OPTS": "-Xms512m -Xmx512m"
+        },
+        "features": {
+            "entrypoints": {},
+            "elasticsearch": {
+                "version": "7.17.22",
+                "install-runit-service": false
+            }
+        },
+        "overrideFeatureInstallOrder": [
+            "./entrypoints",
+            "./elasticsearch"
+        ]
+    },
+    "es-8-mcr-alpine": {
+        "image": "mcr.microsoft.com/devcontainers/base:alpine",
+        "containerEnv": {
+            "ES_JAVA_OPTS": "-Xms512m -Xmx512m"
+        },
+        "features": {
+            "entrypoints": {},
+            "elasticsearch": {
+                "version": "8.14.1",
+                "install-runit-service": false
+            }
+        },
+        "overrideFeatureInstallOrder": [
+            "./entrypoints",
+            "./elasticsearch"
+        ]
+    },
+
+    "es-7-mcr-ubuntu": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "containerEnv": {
+            "ES_JAVA_OPTS": "-Xms512m -Xmx512m"
+        },
+        "features": {
+            "entrypoints": {},
+            "elasticsearch": {
+                "version": "7.17.22",
+                "install-runit-service": false
+            }
+        },
+        "overrideFeatureInstallOrder": [
+            "./entrypoints",
+            "./elasticsearch"
+        ]
+    },
+    "es-8-mcr-ubuntu": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "containerEnv": {
+            "ES_JAVA_OPTS": "-Xms512m -Xmx512m"
+        },
+        "features": {
+            "entrypoints": {},
+            "elasticsearch": {
+                "version": "8.14.1",
+                "install-runit-service": false
+            }
+        },
+        "overrideFeatureInstallOrder": [
+            "./entrypoints",
+            "./elasticsearch"
+        ]
+    }
+}

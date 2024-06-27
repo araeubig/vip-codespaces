@@ -9,15 +9,11 @@ if [ "$(id -u || true)" -ne 0 ]; then
     exit 1
 fi
 
-if [ -z "${_REMOTE_USER}" ] || [ "${_REMOTE_USER}" = "root" ]; then
-    WEB_USER=www-data
-else
-    WEB_USER="${_REMOTE_USER}"
-fi
+: "${_REMOTE_USER:?"_REMOTE_USER is required"}"
 
 echo '(*) Installing Dev Tools...'
 
-install -d -D -m 0755 -o "${WEB_USER}" -g "${WEB_USER}" /wp/wp-content/mu-plugins
-install -m 0644 -o "${WEB_USER}" -g "${WEB_USER}" dev-env-plugin.php /wp/wp-content/mu-plugins/dev-env-plugin.php
+install -d -D -m 0755 -o "${_REMOTE_USER}" -g "${_REMOTE_USER}" /wp/wp-content/mu-plugins
+install -m 0644 -o "${_REMOTE_USER}" -g "${_REMOTE_USER}" dev-env-plugin.php /wp/wp-content/mu-plugins/dev-env-plugin.php
 
 echo 'Done!'

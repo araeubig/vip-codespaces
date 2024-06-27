@@ -1,0 +1,98 @@
+{
+    "ubuntu-normal-nopersist": {
+        "image": "ghcr.io/automattic/vip-codespaces/ubuntu-base:latest",
+        "overrideCommand": false,
+        "features": {
+            "mariadb": {}
+        }
+    },
+    "ubuntu-root-nopersist": {
+        "image": "ghcr.io/automattic/vip-codespaces/ubuntu-base:latest",
+        "remoteUser": "root",
+        "overrideCommand": false,
+        "features": {
+            "mariadb": {}
+        }
+    },
+    "ubuntu-normal-persist": {
+        "image": "ghcr.io/automattic/vip-codespaces/ubuntu-base:latest",
+        "overrideCommand": false,
+        "features": {
+            "mariadb": {
+                "installDatabaseToWorkspaces": true
+            }
+        }
+    },
+    "ubuntu-root-persist": {
+        "image": "ghcr.io/automattic/vip-codespaces/ubuntu-base:latest",
+        "remoteUser": "root",
+        "overrideCommand": false,
+        "features": {
+            "mariadb": {
+                "installDatabaseToWorkspaces": true
+            }
+        }
+    },
+
+    "alpine-normal-nopersist": {
+        "image": "ghcr.io/automattic/vip-codespaces/alpine-base:latest",
+        "overrideCommand": false,
+        "features": {
+            "mariadb": {}
+        }
+    },
+    "alpine-root-nopersist": {
+        "image": "ghcr.io/automattic/vip-codespaces/alpine-base:latest",
+        "remoteUser": "root",
+        "overrideCommand": false,
+        "features": {
+            "mariadb": {}
+        }
+    },
+    "alpine-normal-persist": {
+        "image": "ghcr.io/automattic/vip-codespaces/alpine-base:latest",
+        "overrideCommand": false,
+        "features": {
+            "mariadb": {
+                "installDatabaseToWorkspaces": true
+            }
+        }
+    },
+    "alpine-root-persist": {
+        "image": "ghcr.io/automattic/vip-codespaces/alpine-base:latest",
+        "remoteUser": "root",
+        "overrideCommand": false,
+        "features": {
+            "mariadb": {
+                "installDatabaseToWorkspaces": true
+            }
+        }
+    },
+
+    "ubuntu-mcr": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "entrypoints": {},
+            "mariadb": {
+                "install-runit-service": false
+            }
+        },
+        "overrideFeatureInstallOrder": [
+            "./entrypoints",
+            "./mariadb"
+        ]
+    },
+    "alpine-mcr": {
+        "image": "mcr.microsoft.com/devcontainers/base:alpine",
+        "features": {
+            "entrypoints": {},
+            "mariadb": {
+                "install-runit-service": false
+            }
+        },
+        "overrideFeatureInstallOrder": [
+            "./entrypoints",
+            "./mariadb"
+        ]
+    }
+}

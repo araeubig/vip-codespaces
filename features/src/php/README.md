@@ -17,6 +17,9 @@ Installs PHP into the Dev Environment
 |-----|-----|-----|-----|
 | version | PHP version | string | 8.2 |
 | composer | Whether to install Composer | boolean | true |
+| install-runit-service | Whether to install a runit service for Mailpit | boolean | true |
+| lite-install | Whether to install a minimal set of PHP extensions | boolean | false |
+| skip-gmagick | Whether to skip installing the gmagick extension | boolean | false |
 
 ## Customizations
 

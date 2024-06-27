@@ -9,10 +9,32 @@ if [ "$(id -u || true)" -ne 0 ]; then
     exit 1
 fi
 
-: "${ENABLED:=}"
-
-if [ "${ENABLED}" = "true" ]; then
+if [ "${ENABLED:-}" = "true" ]; then
     echo '(*) Installing Midnight Commander...'
-    apk add --no-cache mc
+
+    # shellcheck source=/dev/null
+    . /etc/os-release
+
+    : "${ID:=}"
+    : "${ID_LIKE:=${ID}}"
+
+    case "${ID_LIKE}" in
+        "debian")
+            export DEBIAN_FRONTEND=noninteractive
+            apt-get update
+            apt-get install -y --no-install-recommends mc
+            apt-get clean
+            rm -rf /var/lib/apt/lists/*
+        ;;
+
+        "alpine")
+            apk add --no-cache mc
+        ;;
+
+        *)
+            echo "(!) Unsupported distribution: ${ID}"
+            exit 1
+    esac
+
     echo 'Done!'
 fi

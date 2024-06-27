@@ -1,31 +1,35 @@
 {
     "build": {
         "dockerfile": "./Dockerfile",
-        "context": ".",
-        "args": {
-            "USERNAME": "vscode"
-        }
+        "context": "."
     },
     "x-build": {
         "name": "Ubuntu",
         "image-name": "ubuntu-base",
-        "image-version": "0.0.2"
+        "image-version": "0.0.13"
     },
     "remoteUser": "vscode",
+    "containerEnv": {
+        "CHARSET": "UTF-8",
+        "CONTAINER_USER": "vscode",
+        "LANG": "C.UTF-8",
+        "LC_COLLATE": "C"
+    },
     "remoteEnv": {
         "SHELL": "/bin/bash"
     },
     "features": {
-        "ghcr.io/devcontainers/features/common-utils:2": {
+        "ghcr.io/devcontainers/features/common-utils:2.4.3": {
             "installZsh": false,
             "installOhMyZsh": false,
             "installOhMyZshConfig": false,
             "upgradePackages": true,
-            "username": "vscode",
-            "userUid": 1000,
-            "userGid": 1000
+            "username": "vscode"
         },
-        "ghcr.io/devcontainers/features/github-cli:1.0.11": {},
-        "ghcr.io/devcontainers/features/git:1.2.0": {}
+        "ghcr.io/devcontainers/features/github-cli:1.0.12": {},
+        "ghcr.io/devcontainers/features/git:1.2.1": {},
+        "./.devcontainer/local-features/sudo": {},
+        "./.devcontainer/local-features/cleanup": {},
+        "./.devcontainer/local-features/syslog": {}
     }
 }

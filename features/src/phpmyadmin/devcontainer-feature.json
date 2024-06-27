@@ -1,7 +1,7 @@
 {
     "id": "phpmyadmin",
     "name": "phpMyAdmin",
-    "version": "1.0.4",
+    "version": "1.1.10",
     "description": "Installs phpMyAdmin into the Dev Environment",
     "options": {
         "enabled": {
@@ -11,6 +11,7 @@
         }
     },
     "installsAfter": [
+        "ghcr.io/automattic/vip-codespaces/base",
         "ghcr.io/automattic/vip-codespaces/php",
         "ghcr.io/automattic/vip-codespaces/nginx"
     ]

@@ -1,0 +1,495 @@
+{
+    "php81-alpine-base": {
+        "image": "ghcr.io/automattic/vip-codespaces/alpine-base:latest",
+        "overrideCommand": false,
+        "features": {
+            "base": {},
+            "nginx": {
+                "mediaRedirectURL": ""
+            },
+            "php": {
+                "version": "8.1",
+                "composer": true
+            },
+            "mariadb": {
+                "installDatabaseToWorkspaces": true
+            },
+            "wordpress": {
+                "version": "latest",
+                "moveUploadsToWorkspaces": true,
+                "multisite": true,
+                "multisiteStyle": "subdirectory"
+            },
+            "wp-cli": {
+                "nightly": false
+            },
+            "vip-go-mu-plugins": {
+                "enabled": true,
+                "development_mode": false
+            },
+            "dev-tools": {},
+            "elasticsearch": {
+                "enabled": true,
+                "installDataToWorkspaces": true
+            },
+            "memcached": {
+                "enabled": true
+            },
+            "vip-cli": {
+                "enabled": true
+            },
+            "mailpit": {
+                "enabled": true
+            },
+            "phpmyadmin": {
+                "enabled": true
+            },
+            "xdebug": {
+                "enabled": true,
+                "mode": "debug,develop"
+            },
+            "mc": {
+                "enabled": true
+            },
+            "photon": {
+                "enabled": true,
+                "disable_optimizations": false
+            },
+            "cron": {
+                "enabled": true,
+                "run_wp_cron": true,
+                "wp_cron_schedule": "*/15 * * * *"
+            }
+        },
+        "overrideFeatureInstallOrder": [
+            "./base",
+            "./wp-cli",
+            "./mariadb",
+            "./mc",
+            "./nginx",
+            "./php",
+            "./vip-cli",
+            "./wordpress",
+            "./cron",
+            "./elasticsearch",
+            "./mailpit",
+            "./memcached",
+            "./photon",
+            "./phpmyadmin",
+            "./vip-go-mu-plugins",
+            "./xdebug",
+            "./dev-tools"
+        ]
+    },
+    "php82-alpine-base": {
+        "image": "ghcr.io/automattic/vip-codespaces/alpine-base:latest",
+        "overrideCommand": false,
+        "features": {
+            "base": {},
+            "nginx": {
+                "mediaRedirectURL": ""
+            },
+            "php": {
+                "version": "8.2",
+                "composer": true
+            },
+            "mariadb": {
+                "installDatabaseToWorkspaces": true
+            },
+            "wordpress": {
+                "version": "latest",
+                "moveUploadsToWorkspaces": true,
+                "multisite": true,
+                "multisiteStyle": "subdirectory"
+            },
+            "wp-cli": {
+                "nightly": false
+            },
+            "vip-go-mu-plugins": {
+                "enabled": true,
+                "development_mode": false
+            },
+            "dev-tools": {},
+            "elasticsearch": {
+                "enabled": true,
+                "installDataToWorkspaces": true
+            },
+            "memcached": {
+                "enabled": true
+            },
+            "vip-cli": {
+                "enabled": true
+            },
+            "mailpit": {
+                "enabled": true
+            },
+            "phpmyadmin": {
+                "enabled": true
+            },
+            "xdebug": {
+                "enabled": true,
+                "mode": "debug,develop"
+            },
+            "mc": {
+                "enabled": true
+            },
+            "photon": {
+                "enabled": true,
+                "disable_optimizations": false
+            },
+            "cron": {
+                "enabled": true,
+                "run_wp_cron": true,
+                "wp_cron_schedule": "*/15 * * * *"
+            }
+        },
+        "overrideFeatureInstallOrder": [
+            "./base",
+            "./wp-cli",
+            "./mariadb",
+            "./mc",
+            "./nginx",
+            "./php",
+            "./vip-cli",
+            "./wordpress",
+            "./cron",
+            "./elasticsearch",
+            "./mailpit",
+            "./memcached",
+            "./photon",
+            "./phpmyadmin",
+            "./vip-go-mu-plugins",
+            "./xdebug",
+            "./dev-tools"
+        ]
+    },
+    "php83-alpine-base": {
+        "image": "ghcr.io/automattic/vip-codespaces/alpine-base:latest",
+        "overrideCommand": false,
+        "features": {
+            "base": {},
+            "nginx": {
+                "mediaRedirectURL": ""
+            },
+            "php": {
+                "version": "8.3",
+                "composer": true
+            },
+            "mariadb": {
+                "installDatabaseToWorkspaces": true
+            },
+            "wordpress": {
+                "version": "latest",
+                "moveUploadsToWorkspaces": true,
+                "multisite": true,
+                "multisiteStyle": "subdirectory"
+            },
+            "wp-cli": {
+                "nightly": false
+            },
+            "vip-go-mu-plugins": {
+                "enabled": true,
+                "development_mode": false
+            },
+            "dev-tools": {},
+            "elasticsearch": {
+                "enabled": true,
+                "installDataToWorkspaces": true
+            },
+            "memcached": {
+                "enabled": true
+            },
+            "vip-cli": {
+                "enabled": true
+            },
+            "mailpit": {
+                "enabled": true
+            },
+            "phpmyadmin": {
+                "enabled": true
+            },
+            "xdebug": {
+                "enabled": true,
+                "mode": "debug,develop"
+            },
+            "mc": {
+                "enabled": true
+            },
+            "photon": {
+                "enabled": true,
+                "disable_optimizations": false
+            },
+            "cron": {
+                "enabled": true,
+                "run_wp_cron": true,
+                "wp_cron_schedule": "*/15 * * * *"
+            }
+        },
+        "overrideFeatureInstallOrder": [
+            "./base",
+            "./wp-cli",
+            "./mariadb",
+            "./mc",
+            "./nginx",
+            "./php",
+            "./vip-cli",
+            "./wordpress",
+            "./cron",
+            "./elasticsearch",
+            "./mailpit",
+            "./memcached",
+            "./photon",
+            "./phpmyadmin",
+            "./vip-go-mu-plugins",
+            "./xdebug",
+            "./dev-tools"
+        ]
+    },
+
+    "php81-ubuntu-base": {
+        "image": "ghcr.io/automattic/vip-codespaces/ubuntu-base:latest",
+        "overrideCommand": false,
+        "features": {
+            "base": {},
+            "nginx": {
+                "mediaRedirectURL": ""
+            },
+            "php": {
+                "version": "8.1",
+                "composer": true
+            },
+            "mariadb": {
+                "installDatabaseToWorkspaces": true
+            },
+            "wordpress": {
+                "version": "latest",
+                "moveUploadsToWorkspaces": true,
+                "multisite": true,
+                "multisiteStyle": "subdirectory"
+            },
+            "wp-cli": {
+                "nightly": false
+            },
+            "vip-go-mu-plugins": {
+                "enabled": true,
+                "development_mode": false
+            },
+            "dev-tools": {},
+            "elasticsearch": {
+                "enabled": true,
+                "installDataToWorkspaces": true
+            },
+            "memcached": {
+                "enabled": true
+            },
+            "vip-cli": {
+                "enabled": true
+            },
+            "mailpit": {
+                "enabled": true
+            },
+            "phpmyadmin": {
+                "enabled": true
+            },
+            "xdebug": {
+                "enabled": true,
+                "mode": "debug,develop"
+            },
+            "mc": {
+                "enabled": true
+            },
+            "photon": {
+                "enabled": true,
+                "disable_optimizations": false
+            },
+            "cron": {
+                "enabled": true,
+                "run_wp_cron": true,
+                "wp_cron_schedule": "*/15 * * * *"
+            }
+        },
+        "overrideFeatureInstallOrder": [
+            "./base",
+            "./wp-cli",
+            "./mariadb",
+            "./mc",
+            "./nginx",
+            "./php",
+            "./vip-cli",
+            "./wordpress",
+            "./cron",
+            "./elasticsearch",
+            "./mailpit",
+            "./memcached",
+            "./photon",
+            "./phpmyadmin",
+            "./vip-go-mu-plugins",
+            "./xdebug",
+            "./dev-tools"
+        ]
+    },
+    "php82-ubuntu-base": {
+        "image": "ghcr.io/automattic/vip-codespaces/ubuntu-base:latest",
+        "overrideCommand": false,
+        "features": {
+            "base": {},
+            "nginx": {
+                "mediaRedirectURL": ""
+            },
+            "php": {
+                "version": "8.2",
+                "composer": true
+            },
+            "mariadb": {
+                "installDatabaseToWorkspaces": true
+            },
+            "wordpress": {
+                "version": "latest",
+                "moveUploadsToWorkspaces": true,
+                "multisite": true,
+                "multisiteStyle": "subdirectory"
+            },
+            "wp-cli": {
+                "nightly": false
+            },
+            "vip-go-mu-plugins": {
+                "enabled": true,
+                "development_mode": false
+            },
+            "dev-tools": {},
+            "elasticsearch": {
+                "enabled": true,
+                "installDataToWorkspaces": true
+            },
+            "memcached": {
+                "enabled": true
+            },
+            "vip-cli": {
+                "enabled": true
+            },
+            "mailpit": {
+                "enabled": true
+            },
+            "phpmyadmin": {
+                "enabled": true
+            },
+            "xdebug": {
+                "enabled": true,
+                "mode": "debug,develop"
+            },
+            "mc": {
+                "enabled": true
+            },
+            "photon": {
+                "enabled": true,
+                "disable_optimizations": false
+            },
+            "cron": {
+                "enabled": true,
+                "run_wp_cron": true,
+                "wp_cron_schedule": "*/15 * * * *"
+            }
+        },
+        "overrideFeatureInstallOrder": [
+            "./base",
+            "./wp-cli",
+            "./mariadb",
+            "./mc",
+            "./nginx",
+            "./php",
+            "./vip-cli",
+            "./wordpress",
+            "./cron",
+            "./elasticsearch",
+            "./mailpit",
+            "./memcached",
+            "./photon",
+            "./phpmyadmin",
+            "./vip-go-mu-plugins",
+            "./xdebug",
+            "./dev-tools"
+        ]
+    },
+    "php83-ubuntu-base": {
+        "image": "ghcr.io/automattic/vip-codespaces/ubuntu-base:latest",
+        "overrideCommand": false,
+        "features": {
+            "base": {},
+            "nginx": {
+                "mediaRedirectURL": ""
+            },
+            "php": {
+                "version": "8.3",
+                "composer": true
+            },
+            "mariadb": {
+                "installDatabaseToWorkspaces": true
+            },
+            "wordpress": {
+                "version": "latest",
+                "moveUploadsToWorkspaces": true,
+                "multisite": true,
+                "multisiteStyle": "subdirectory"
+            },
+            "wp-cli": {
+                "nightly": false
+            },
+            "vip-go-mu-plugins": {
+                "enabled": true,
+                "development_mode": false
+            },
+            "dev-tools": {},
+            "elasticsearch": {
+                "enabled": true,
+                "installDataToWorkspaces": true
+            },
+            "memcached": {
+                "enabled": true
+            },
+            "vip-cli": {
+                "enabled": true
+            },
+            "mailpit": {
+                "enabled": true
+            },
+            "phpmyadmin": {
+                "enabled": true
+            },
+            "xdebug": {
+                "enabled": true,
+                "mode": "debug,develop"
+            },
+            "mc": {
+                "enabled": true
+            },
+            "photon": {
+                "enabled": true,
+                "disable_optimizations": false
+            },
+            "cron": {
+                "enabled": true,
+                "run_wp_cron": true,
+                "wp_cron_schedule": "*/15 * * * *"
+            }
+        },
+        "overrideFeatureInstallOrder": [
+            "./base",
+            "./wp-cli",
+            "./mariadb",
+            "./mc",
+            "./nginx",
+            "./php",
+            "./vip-cli",
+            "./wordpress",
+            "./cron",
+            "./elasticsearch",
+            "./mailpit",
+            "./memcached",
+            "./photon",
+            "./phpmyadmin",
+            "./vip-go-mu-plugins",
+            "./xdebug",
+            "./dev-tools"
+        ]
+    }
+}

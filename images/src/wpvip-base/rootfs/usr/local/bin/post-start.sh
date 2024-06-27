@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 if [ "${CODESPACES:-}" = 'true' ] && [ "${CLOUDENV_ENVIRONMENT_ID:-}" = 'null' ] && [ -n "${GITHUB_TOKEN}" ]; then
     echo "Prebuild detected, skipping WordPress setup"

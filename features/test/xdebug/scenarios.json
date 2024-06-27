@@ -1,0 +1,34 @@
+{
+    "alpine-base": {
+        "image": "ghcr.io/automattic/vip-codespaces/alpine-base:latest",
+        "overrideCommand": false,
+        "features": {
+            "php": {
+                "composer": false,
+                "lite-install": true,
+                "skip-gmagick": true
+            },
+            "xdebug": {}
+        },
+        "overrideFeatureInstallOrder": [
+            "./php",
+            "./xdebug"
+        ]
+    },
+    "ubuntu-base": {
+        "image": "ghcr.io/automattic/vip-codespaces/ubuntu-base:latest",
+        "overrideCommand": false,
+        "features": {
+            "php": {
+                "composer": false,
+                "lite-install": true,
+                "skip-gmagick": true
+            },
+            "xdebug": {}
+        },
+        "overrideFeatureInstallOrder": [
+            "./php",
+            "./xdebug"
+        ]
+    }
+}

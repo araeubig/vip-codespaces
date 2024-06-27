@@ -6,7 +6,7 @@
     "x-build": {
         "name": "WPVIP",
         "image-name": "wpvip-base",
-        "image-version": "0.0.3"
+        "image-version": "0.0.8"
     },
     "remoteUser": "vscode",
     "postStartCommand": "/usr/local/bin/post-start.sh",
@@ -16,9 +16,7 @@
             "installOhMyZsh": false,
             "installOhMyZshConfig": false,
             "upgradePackages": true,
-            "username": "vscode",
-            "userUid": 1000,
-            "userGid": 1000
+            "username": "vscode"
         },
         "ghcr.io/devcontainers/features/git:1": {},
         "ghcr.io/devcontainers/features/github-cli:1": {},

@@ -16,6 +16,8 @@ Sets up memcached into the Dev Environment
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
 | enabled | Enable memcached | boolean | true |
+| install-runit-service | Whether to install a runit service for Mailpit | boolean | true |
+| memory_size | Memory size for memcached in MB | string | 64 |
 
 
 

@@ -9,35 +9,16 @@ if [ "$(id -u || true)" -ne 0 ]; then
     exit 1
 fi
 
-echo '(*) Downloading WordPress...'
-
-if [ -z "${_REMOTE_USER}" ] || [ "${_REMOTE_USER}" = "root" ]; then
-    WEB_USER="${CONTAINER_USER:-www-data}"
-else
-    WEB_USER="${_REMOTE_USER}"
-fi
-
+: "${_REMOTE_USER:?"_REMOTE_USER is required"}"
 : "${MOVEUPLOADSTOWORKSPACES:=}"
 : "${MULTISITE:=}"
 : "${VERSION:=latest}"
-
-install -d -m 0755 -o root -g root /etc/wp-cli /usr/share/wordpress
-install -m 0644 -o root -g root wp-cli.yaml /etc/wp-cli
-install -d -o "${WEB_USER}" -g "${WEB_USER}" -m 0755 /wp
-cp -a wp/* /wp && chown -R "${WEB_USER}:${WEB_USER}" /wp/* && chmod -R 0755 /wp/* && find /wp -type f -exec chmod 0644 {} \;
-su-exec "${WEB_USER}:${WEB_USER}" wp core download --path=/wp --skip-content --version="${VERSION}"
 
 if [ "${MOVEUPLOADSTOWORKSPACES}" != 'true' ]; then
     WP_PERSIST_UPLOADS=""
 else
     WP_PERSIST_UPLOADS=1
 fi
-
-install -m 0755 -o root -g root setup-wordpress.sh /usr/local/bin/setup-wordpress.sh
-install -m 0755 -o root -g root wordpress-post-create.sh /usr/local/bin/wordpress-post-create.sh
-install -m 0644 -o root -g root wp-config.php.tpl /usr/share/wordpress/
-install -m 0644 -o root -g root 010-wplogin.tpl /usr/share/wordpress/
-install -d -D -m 0755 -o root -g root /var/lib/wordpress/postinstall.d
 
 WP_DOMAIN="${DOMAIN:-localhost}"
 if [ "${MULTISITE}" != 'true' ]; then
@@ -46,6 +27,21 @@ else
     WP_MULTISITE=1
 fi
 WP_MULTISITE_TYPE="${MULTISITE_TYPE:-subdirectory}"
+
+echo '(*) Downloading WordPress...'
+
+install -d -m 0755 -o root -g root /etc/wp-cli /usr/share/wordpress
+install -m 0644 -o root -g root wp-cli.yaml /etc/wp-cli
+install -d -o "${_REMOTE_USER}" -g "${_REMOTE_USER}" -m 0755 /wp
+cp -a wp/* /wp
+chmod -R 0755 /wp
+find /wp -type f -exec chmod 0644 {} \;
+wp --allow-root core download --path=/wp --skip-content --version="${VERSION}"
+chown -R "${_REMOTE_USER}:${_REMOTE_USER}" /wp
+
+install -m 0755 -o root -g root setup-wordpress.sh wordpress-post-create.sh wordpress-update-content.sh /usr/local/bin/
+install -m 0644 -o root -g root wp-config.php.tpl 010-wplogin.tpl /usr/share/wordpress/
+install -d -D -m 0755 -o root -g root /var/lib/wordpress/postinstall.d /etc/conf.d
 
 export WP_DOMAIN WP_MULTISITE WP_MULTISITE_TYPE WP_PERSIST_UPLOADS
 # shellcheck disable=SC2016

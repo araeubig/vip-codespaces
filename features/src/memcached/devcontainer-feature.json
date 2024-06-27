@@ -1,16 +1,27 @@
 {
     "name": "memcached",
     "id": "memcached",
-    "version": "1.2.1",
+    "version": "1.4.0",
     "description": "Sets up memcached into the Dev Environment",
     "options": {
         "enabled": {
             "type": "boolean",
             "default": true,
             "description": "Enable memcached"
+        },
+        "install-runit-service": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether to install a runit service for Mailpit"
+        },
+        "memory_size": {
+            "type": "string",
+            "default": "64",
+            "description": "Memory size for memcached in MB"
         }
     },
     "installsAfter": [
+        "ghcr.io/automattic/vip-codespaces/entrypoints",
         "ghcr.io/automattic/vip-codespaces/wordpress"
     ]
 }

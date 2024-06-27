@@ -1,0 +1,42 @@
+{
+    "alpine-base": {
+        "image": "ghcr.io/automattic/vip-codespaces/alpine-base:latest",
+        "overrideCommand": false,
+        "features": {
+            "mailpit": {}
+        }
+    },
+    "ubuntu-base": {
+        "image": "ghcr.io/automattic/vip-codespaces/ubuntu-base:latest",
+        "overrideCommand": false,
+        "features": {
+            "mailpit": {}
+        }
+    },
+    "alpine": {
+        "image": "mcr.microsoft.com/devcontainers/base:alpine",
+        "features": {
+            "entrypoints": {},
+            "mailpit": {
+                "install-runit-service": false
+            }
+        },
+        "overrideFeatureInstallOrder": [
+            "./entrypoints",
+            "./mailpit"
+        ]
+    },
+    "ubuntu": {
+        "image": "mcr.microsoft.com/devcontainers/base:alpine",
+        "features": {
+            "entrypoints": {},
+            "mailpit": {
+                "install-runit-service": false
+            }
+        },
+        "overrideFeatureInstallOrder": [
+            "./entrypoints",
+            "./mailpit"
+        ]
+    }
+}

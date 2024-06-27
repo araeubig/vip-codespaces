@@ -1,0 +1,3 @@
+#!/bin/sh
+
+trust extract --overwrite --format=java-cacerts --filter=ca-anchors --purpose=server-auth /usr/share/elasticsearch/jdk/lib/security/cacerts

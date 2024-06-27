@@ -1,0 +1,66 @@
+{
+    "alpine-base": {
+        "image": "ghcr.io/automattic/vip-codespaces/alpine-base:latest",
+        "overrideCommand": false,
+        "features": {
+            "nginx": {},
+            "php": {
+                "composer": false,
+                "lite-install": true, 
+                "skip-gmagick": true
+            }
+        }
+    },
+    "ubuntu-base": {
+        "image": "ghcr.io/automattic/vip-codespaces/ubuntu-base:latest",
+        "overrideCommand": false,
+        "features": {
+            "nginx": {},
+            "php": {
+                "composer": false,
+                "lite-install": true, 
+                "skip-gmagick": true
+            }
+        }
+    },
+    "alpine-mcr": {
+        "image": "mcr.microsoft.com/devcontainers/base:alpine",
+        "features": {
+            "entrypoints": {},
+            "php": {
+                "composer": false,
+                "lite-install": true, 
+                "skip-gmagick": true,
+                "install-runit-service": false
+            },
+            "nginx": {
+                "install-runit-service": false
+            }
+        },
+        "overrideFeatureInstallOrder": [
+            "./entrypoints",
+            "./php",
+            "./nginx"
+        ]
+    },
+    "ubuntu-mcr": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "entrypoints": {},
+            "php": {
+                "composer": false,
+                "lite-install": true, 
+                "skip-gmagick": true,
+                "install-runit-service": false
+            },
+            "nginx": {
+                "install-runit-service": false
+            }
+        },
+        "overrideFeatureInstallOrder": [
+            "./entrypoints",
+            "./php",
+            "./nginx"
+        ]
+    }
+}

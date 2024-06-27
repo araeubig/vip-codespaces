@@ -2,10 +2,8 @@
     "id": "php",
     "name": "PHP",
     "description": "Installs PHP into the Dev Environment",
-    "version": "2.3.0",
-    "containerEnv": {
-        "PHP_INI_DIR": "/etc/php"
-    },
+    "version": "2.5.1",
+    "documentationURL": "https://github.com/Automattic/vip-codespaces/tree/trunk/features/src/php",
     "options": {
         "version": {
             "type": "string",
@@ -17,6 +15,21 @@
             "type": "boolean",
             "default": true,
             "description": "Whether to install Composer"
+        },
+        "install-runit-service": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether to install a runit service for Mailpit"
+        },
+        "lite-install": {
+            "type": "boolean",
+            "default": false,
+            "description": "Whether to install a minimal set of PHP extensions"
+        },
+        "skip-gmagick": {
+            "type": "boolean",
+            "default": false,
+            "description": "Whether to skip installing the gmagick extension"
         }
     },
     "customizations": {
@@ -31,7 +44,7 @@
             "settings": {
                 "intelephense.environment.documentRoot": "/wp",
                 "intelephense.environment.includePaths": ["/wp"],
-                "intelephense.environment.phpVersion": "8.0.0",
+                "intelephense.environment.phpVersion": "8.1.0",
                 "intelephense.stubs": [
                     "apcu", "bcmath", "calendar", "Core", "ctype", "curl", "date", "dom", "exif", "fileinfo", "filter", "fpm", "ftp", "gd", "gmagick", "gmp",
                     "hash", "iconv", "igbinary", "intl", "json", "libxml", "mbstring", "memcache", "memcached", "meta", "mysqli", "newrelic", "openssl",
@@ -46,6 +59,7 @@
         }
     },
     "installsAfter": [
+        "ghcr.io/automattic/vip-codespaces/entrypoints",
         "ghcr.io/automattic/vip-codespaces/base"
     ]
 }

@@ -20,6 +20,9 @@ else
 fi
 
 if ! hash wget >/dev/null 2>&1; then
+    # shellcheck source=/dev/null
+    . /etc/os-release
+
     : "${ID:=}"
     : "${ID_LIKE:=${ID}}"
 
@@ -30,6 +33,7 @@ if ! hash wget >/dev/null 2>&1; then
 
     case "${ID_LIKE}" in
         "debian")
+            export DEBIAN_FRONTEND=noninteractive
             PACKAGES="wget"
             if ! hash update-ca-certificates >/dev/null 2>&1; then
                 PACKAGES="${PACKAGES} ca-certificates"

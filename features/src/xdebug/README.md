@@ -15,7 +15,7 @@ Configures Xdebug for the Dev Environment
 
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
-| enabled | Enable Xdebug feature | boolean | false |
+| enabled | Whether to enable Xdebug (`false` is equivalent to setting `mode` to `off`) | boolean | false |
 | mode | Xdebug mode | string | debug,develop |
 
 ## Customizations

@@ -17,10 +17,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
       - name: Validate devcontainer-feature.json files
-        uses: devcontainers/action@v1.4.2
+        uses: devcontainers/action@528049dce833673f136ddfc09c2720d450029a6b # v1.4.2
         with:
           validate-only: "true"
           base-path-to-features: "./features/src"

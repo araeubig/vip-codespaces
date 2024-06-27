@@ -2,11 +2,11 @@
     "id": "cron",
     "name": "Cron",
     "description": "Enables cron in the Dev Environment",
-    "version": "1.0.3",
+    "version": "1.2.0",
     "options": {
         "enabled": {
             "type": "boolean",
-            "default": false,
+            "default": true,
             "description": "Enable cron"
         },
         "run_wp_cron": {
@@ -18,9 +18,14 @@
             "type": "string",
             "default": "*/15 * * * *",
             "description": "Interval for wp-cron.php"
+        },
+        "install-runit-service": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether to install a runit service for cron"
         }
     },
     "installsAfter": [
-        "ghcr.io/automattic/vip-codespaces/wordpress"
+        "ghcr.io/automattic/vip-codespaces/entrypoints"
     ]
 }

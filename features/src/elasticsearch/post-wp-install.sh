@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ -e /etc/service/elasticsearch ] && wp cli has-command vip-search; then
+if [ -e /etc/service/elasticsearch ] && hash wp > /dev/null 2>&1 && wp cli has-command vip-search; then
     echo "Waiting for Elasticsearch to come online..."
     second=0
     while ! curl -s 'http://127.0.0.1:9200/_cluster/health' > /dev/null && [ "${second}" -lt 60 ]; do

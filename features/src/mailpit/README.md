@@ -16,6 +16,7 @@ Sets up Mailpit into the Dev Environment
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
 | enabled | Enable Mailpit | boolean | true |
+| install-runit-service | Whether to install a runit service for Mailpit | boolean | true |
 
 
 

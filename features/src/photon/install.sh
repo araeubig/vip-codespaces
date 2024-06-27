@@ -9,43 +9,116 @@ if [ "$(id -u || true)" -ne 0 ]; then
     exit 1
 fi
 
-if [ "${ENABLED:-}" = 'true' ]; then
+: "${_REMOTE_USER:?"_REMOTE_USER is required"}"
+: "${ENABLED:=false}"
+: "${DISABLE_OPTIMIZATIONS:=true}"
+: "${ONLY_IMAGES_WITH_QS:=true}"
+
+if [ "${ENABLED}" = 'true' ]; then
     echo '(*) Installing Photon...'
 
-    if [ -z "${_REMOTE_USER}" ] || [ "${_REMOTE_USER}" = "root" ]; then
-        PHOTON_USER=www-data
-    else
-        PHOTON_USER="${_REMOTE_USER}"
+    # shellcheck source=/dev/null
+    . /etc/os-release
+    : "${ID:=}"
+    : "${ID_LIKE:=${ID}}"
+
+    PACKAGES=""
+    if ! hash svn >/dev/null 2>&1; then
+        PACKAGES="${PACKAGES} subversion"
     fi
 
-    : "${DISABLE_OPTIMIZATIONS:=false}"
-
-    if [ "${DISABLE_OPTIMIZATIONS}" = 'false' ]; then
-        apk add --no-cache optipng pngquant libwebp-tools jpegoptim libjpeg-turbo-utils pngcrush
+    if ! hash update-ca-certificates >/dev/null 2>&1; then
+        PACKAGES="${PACKAGES} ca-certificates"
     fi
 
-    install -d -m 0755 -o "${PHOTON_USER}" -g "${PHOTON_USER}" /etc/photon
-    install -m 0644 -o "${PHOTON_USER}" -g "${PHOTON_USER}" config.php /etc/photon/config.php
-
     if [ "${DISABLE_OPTIMIZATIONS}" = 'false' ]; then
+        if ! hash optipng >/dev/null 2>&1; then
+            PACKAGES="${PACKAGES} optipng"
+        fi
+
+        if ! hash pngquant >/dev/null 2>&1; then
+            PACKAGES="${PACKAGES} pngquant"
+        fi
+
+        if ! hash jpegoptim >/dev/null 2>&1; then
+            PACKAGES="${PACKAGES} jpegoptim"
+        fi
+
+        if ! hash jpegoptim >/dev/null 2>&1; then
+            PACKAGES="${PACKAGES} pngcrush"
+        fi
+    fi
+
+    case "${ID_LIKE}" in
+        "debian")
+            export DEBIAN_FRONTEND=noninteractive
+            if [ "${DISABLE_OPTIMIZATIONS}" = 'false' ]; then
+                if ! hash cwebp >/dev/null 2>&1; then
+                    PACKAGES="${PACKAGES} webp"
+                fi
+
+                if ! hash cjpeg >/dev/null 2>&1; then
+                    PACKAGES="${PACKAGES} libjpeg-turbo-progs"
+                fi
+            fi
+
+            if [ -n "${PACKAGES}" ]; then
+                apt-get update
+                # shellcheck disable=SC2086
+                apt-get install -y --no-install-recommends ${PACKAGES}
+                apt-get clean
+                rm -rf /var/lib/apt/lists/*
+            fi
+        ;;
+
+        "alpine")
+            if [ "${DISABLE_OPTIMIZATIONS}" = 'false' ]; then
+                if ! hash cwebp >/dev/null 2>&1; then
+                    PACKAGES="${PACKAGES} libwebp-tools"
+                fi
+
+                if ! hash cjpeg >/dev/null 2>&1; then
+                    PACKAGES="${PACKAGES} libjpeg-turbo-utils"
+                fi
+            fi
+
+            if [ -n "${PACKAGES}" ]; then
+                # shellcheck disable=SC2086
+                apk add --no-cache ${PACKAGES}
+            fi
+        ;;
+
+        *)
+            echo "(!) Unsupported distribution: ${ID}"
+            exit 1
+        ;;
+    esac
+
+
+    install -d -m 0755 -o "${_REMOTE_USER}" -g "${_REMOTE_USER}" /etc/photon
+    install -m 0644 -o "${_REMOTE_USER}" -g "${_REMOTE_USER}" config.php /etc/photon/config.php
+
+    if [ "${DISABLE_OPTIMIZATIONS}" != 'false' ]; then
         sed -r -i "s@'/usr/bin/[a-z]+'@false@" /etc/photon/config.php
     fi
 
-    install -d -D -m 0755 -o "${PHOTON_USER}" -g "${PHOTON_USER}" /usr/share/webapps/photon
+    install -d -D -m 0755 -o "${_REMOTE_USER}" -g "${_REMOTE_USER}" /usr/share/webapps/photon
     svn co https://code.svn.wordpress.org/photon/ /usr/share/webapps/photon
     rm -rf /usr/share/webapps/photon/.svn /usr/share/webapps/photon/tests
-    chown -R "${PHOTON_USER}:${PHOTON_USER}" /usr/share/webapps/photon
+    chown -R "${_REMOTE_USER}:${_REMOTE_USER}" /usr/share/webapps/photon
     ln -s /etc/photon/config.php /usr/share/webapps/photon/config.php
 
-    rm -f /etc/nginx/conf.extra/media-redirect.conf
+    if [ -d /etc/nginx/conf.extra ]; then
+        rm -f /etc/nginx/conf.extra/media-redirect.conf
 
-    if [ -f /etc/conf.d/nginx ]; then
-        # shellcheck source=/dev/null
-        . /etc/conf.d/nginx
+        if [ -f /etc/conf.d/nginx ]; then
+            # shellcheck source=/dev/null
+            . /etc/conf.d/nginx
+        fi
+
+        : "${MEDIA_REDIRECT_URL:=}"
+        php photon.tpl.php "${MEDIA_REDIRECT_URL}" "${ONLY_IMAGES_WITH_QS}" > /etc/nginx/conf.extra/photon.conf
     fi
-
-    : "${MEDIA_REDIRECT_URL:=}"
-    php photon.tpl.php "${MEDIA_REDIRECT_URL}" "${ONLY_IMAGES_WITH_QS:-true}" > /etc/nginx/conf.extra/photon.conf
 
     echo 'Done!'
 fi

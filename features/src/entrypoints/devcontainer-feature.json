@@ -1,0 +1,7 @@
+{
+    "id": "entrypoints",
+    "name": "Entrypoint Runner",
+    "description": "Runs entrypoint scripts for images without runit",
+    "version": "1.0.0",
+    "entrypoint": "/usr/local/bin/entrypoint-runner"
+}
