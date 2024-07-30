@@ -35,15 +35,16 @@ echo "${content_type} ${content_length}"
 check "600x400.png; returned as a PNG" test "${content_type}" = 'image/png'
 check "600x400.png; content length matches file size" test "${content_length}" = "${file_size}"
 
-content_type="$(curl -s -w '%{content_type}' http://localhost/wp-content/uploads/600x400.png? -o /dev/null)"
-content_length="$(curl -s -w '%{size_download}' http://localhost/wp-content/uploads/600x400.png? -o /dev/null)"
+# cURL 8.8.0 does not send empty queries; `http://localhost/wp-content/uploads/600x400.png?` is sent as `http://localhost/wp-content/uploads/600x400.png`
+content_type="$(curl -s -w '%{content_type}' http://localhost/wp-content/uploads/600x400.png?_ -o /dev/null)"
+content_length="$(curl -s -w '%{size_download}' http://localhost/wp-content/uploads/600x400.png?_ -o /dev/null)"
 
 echo "${content_type} ${content_length}"
 check "600x400.png (optimized); returned as a PNG" test "${content_type}" = 'image/png'
 check "600x400.png (optimized); content length is less than file size" test "${content_length}" -lt "${file_size}"
 
-content_type="$(curl -s -w '%{content_type}' -H 'Accept: image/webp' http://localhost/wp-content/uploads/600x400.png? -o /dev/null)"
-content_length="$(curl -s -w '%{size_download}' -H 'Accept: image/webp' http://localhost/wp-content/uploads/600x400.png? -o /dev/null)"
+content_type="$(curl -s -w '%{content_type}' -H 'Accept: image/webp' http://localhost/wp-content/uploads/600x400.png?_ -o /dev/null)"
+content_length="$(curl -s -w '%{size_download}' -H 'Accept: image/webp' http://localhost/wp-content/uploads/600x400.png?_ -o /dev/null)"
 
 echo "${content_type} ${content_length}"
 check "600x400.png (as webp); returned as a WEBP" test "${content_type}" = 'image/webp'

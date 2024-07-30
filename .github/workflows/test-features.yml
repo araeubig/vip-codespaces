@@ -24,7 +24,7 @@ jobs:
         baseImage:
           - debian:latest
           - debian:bookworm-slim
-          - ubuntu:jammy # noble is not supported by ondrej/php yet
+          - ubuntu:noble
           - mcr.microsoft.com/devcontainers/base:ubuntu
           - mcr.microsoft.com/devcontainers/base:debian
           - mcr.microsoft.com/devcontainers/base:alpine

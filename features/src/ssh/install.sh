@@ -33,7 +33,13 @@ if [ "${ENABLED:-}" = "true" ]; then
         ;;
 
         "alpine")
-            apk add --no-cache openssh-server
+            PACKAGES="openssh-server"
+            if [ -n "$(apk list --no-cache --installed --quiet openssh-client-default || true)" ]; then
+                PACKAGES="${PACKAGES} openssh-client-default"
+            fi
+
+            # shellcheck disable=SC2086
+            apk add --no-cache ${PACKAGES}
             rm -f /etc/conf.d/sshd /etc/init.d/sshd
             PRIVSEP_DIR=/var/empty
         ;;

@@ -4,6 +4,11 @@ updates:
     package-ecosystem: github-actions
     schedule:
       interval: daily
+    groups:
+      docker:
+        applies-to: version-updates
+        patterns:
+          - "docker/*"
 
   - directory: images/src/alpine-base
     package-ecosystem: docker

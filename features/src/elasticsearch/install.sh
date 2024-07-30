@@ -65,6 +65,10 @@ if [ "${ENABLED}" = "true" ]; then
                 PACKAGES="${PACKAGES} netcat-openbsd"
             fi
 
+            if [ "${_REMOTE_USER}" = "root" ] && ! hash adduser >/dev/null 2>&1; then
+                PACKAGES="${PACKAGES} adduser"
+            fi
+
             if [ -n "${PACKAGES}" ]; then
                 apt-get update
                 # shellcheck disable=SC2086
