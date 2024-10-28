@@ -2,7 +2,7 @@
     "id": "elasticsearch",
     "name": "Elasticsearch",
     "description": "Sets up Elasticsearch into the Dev Environment",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "containerEnv": {
         "ES_TMPDIR": "/usr/share/elasticsearch/tmp"
     },
@@ -14,9 +14,9 @@
         },
         "version": {
             "type": "string",
-            "default": "7.17.23",
+            "default": "7.17.25",
             "description": "Elasticsearch version to install",
-            "proposals": ["7.17.23", "8.15.0"]
+            "proposals": ["7.17.25", "8.15.3"]
         },
         "installDataToWorkspaces": {
             "type": "boolean",
