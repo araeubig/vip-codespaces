@@ -76,8 +76,8 @@ jobs:
 
       - name: Download Elasticsearch
         run: |
-          wget https://artifacts-no-kpi.elastic.co/downloads/elasticsearch/elasticsearch-7.17.23-linux-x86_64.tar.gz
-          wget https://artifacts-no-kpi.elastic.co/downloads/elasticsearch/elasticsearch-8.15.0-linux-x86_64.tar.gz
+          wget https://artifacts-no-kpi.elastic.co/downloads/elasticsearch/elasticsearch-7.17.25-linux-x86_64.tar.gz
+          wget https://artifacts-no-kpi.elastic.co/downloads/elasticsearch/elasticsearch-8.15.3-linux-x86_64.tar.gz
         working-directory: features/src/elasticsearch
         if: matrix.test.feature == 'elasticsearch'
 
