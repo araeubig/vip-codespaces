@@ -6,7 +6,7 @@
     "x-build": {
         "name": "Ubuntu",
         "image-name": "ubuntu-base",
-        "image-version": "0.0.28"
+        "image-version": "0.0.29"
     },
     "remoteUser": "vscode",
     "containerEnv": {
