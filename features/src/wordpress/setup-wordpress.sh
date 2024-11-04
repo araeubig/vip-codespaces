@@ -61,7 +61,7 @@ if [ -e "${base}/vip-config" ]; then
     sudo rm -rf /wp/vip-config
 fi
 
-sudo chown -R "${MY_UID}:${MY_GID}" /wp
+sudo chown "${MY_UID}:${MY_GID}" /wp/* /wp/wp-content/*
 
 for i in client-mu-plugins images languages plugins themes; do
     if [ -e "${base}/${i}" ]; then
