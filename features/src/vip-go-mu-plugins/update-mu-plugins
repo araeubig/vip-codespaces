@@ -32,10 +32,10 @@ git clone --depth=1 --recurse-submodules --shallow-submodules https://github.com
 git clone --depth=1 https://github.com/Automattic/vip-go-mu-plugins-ext.git "${TEMP_DIR}/mu-plugins-ext" --single-branch
 
 if [ "${DEVELOPMENT_MODE}" != 'true' ]; then
-    rsync -a --delete "${TEMP_DIR}/mu-plugins/" "${TEMP_DIR}/mu-plugins-ext/" /wp/wp-content/mu-plugins --exclude-from="${TEMP_DIR}/mu-plugins/.dockerignore" --exclude-from="${TEMP_DIR}/mu-plugins-ext/.dockerignore" --exclude-from=/etc/vip-go-mu-plugins/.rsyncignore
+    rsync -a --delete "${TEMP_DIR}/mu-plugins/" "${TEMP_DIR}/mu-plugins-ext/" /wp/wp-content/mu-plugins --exclude-from="${TEMP_DIR}/mu-plugins/.dockerignore" --exclude-from="${TEMP_DIR}/mu-plugins-ext/.dockerignore"  --exclude-from="${TEMP_DIR}/mu-plugins-ext/.devenvignore" --exclude-from=/etc/vip-go-mu-plugins/.rsyncignore
     find /wp/wp-content/mu-plugins \( -name .svn -o -name .github -o -name ".git*" \) -type d -exec rm -rfv {} \; 2> /dev/null
 else
-    rsync -a --delete "${TEMP_DIR}/mu-plugins/" "${TEMP_DIR}/mu-plugins-ext/" /wp/wp-content/mu-plugins --exclude-from=/etc/vip-go-mu-plugins/.rsyncignore
+    rsync -a --delete "${TEMP_DIR}/mu-plugins/" "${TEMP_DIR}/mu-plugins-ext/" /wp/wp-content/mu-plugins --exclude-from=/etc/vip-go-mu-plugins/.rsyncignore --exclude-from="${TEMP_DIR}/mu-plugins-ext/.devenvignore"
 fi
 
 if [ "${MY_UID}" -eq 0 ]; then
