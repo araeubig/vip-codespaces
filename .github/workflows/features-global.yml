@@ -25,9 +25,11 @@ jobs:
           - php81-alpine-base
           - php82-alpine-base
           - php83-alpine-base
+          - php84-alpine-base
           - php81-ubuntu-base
           - php82-ubuntu-base
           - php83-ubuntu-base
+          - php84-ubuntu-base
     steps:
       - name: Checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2

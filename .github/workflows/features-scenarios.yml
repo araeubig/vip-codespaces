@@ -48,6 +48,8 @@ jobs:
             filter: '82'
           - feature: php
             filter: '83'
+          - feature: php
+            filter: '84'
           - feature: phpmyadmin
           - feature: playwright
           - feature: ssh
