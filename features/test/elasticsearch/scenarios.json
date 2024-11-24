@@ -7,7 +7,7 @@
         },
         "features": {
             "elasticsearch": {
-                "version": "7.17.22"
+                "version": "7.17.25"
             }
         }
     },
@@ -19,7 +19,7 @@
         },
         "features": {
             "elasticsearch": {
-                "version": "8.14.1"
+                "version": "8.16.1"
             }
         }
     },
@@ -31,7 +31,7 @@
         },
         "features": {
             "elasticsearch": {
-                "version": "7.17.22",
+                "version": "7.17.25",
                 "installDataToWorkspaces": true
             }
         }
@@ -44,7 +44,7 @@
         },
         "features": {
             "elasticsearch": {
-                "version": "8.14.1",
+                "version": "8.16.1",
                 "installDataToWorkspaces": true
             }
         }
@@ -57,7 +57,7 @@
         },
         "features": {
             "elasticsearch": {
-                "version": "7.17.22"
+                "version": "7.17.25"
             }
         }
     },
@@ -69,7 +69,7 @@
         },
         "features": {
             "elasticsearch": {
-                "version": "8.14.1"
+                "version": "8.16.1"
             }
         }
     },
@@ -81,7 +81,7 @@
         },
         "features": {
             "elasticsearch": {
-                "version": "7.17.22",
+                "version": "7.17.25",
                 "installDataToWorkspaces": true
             }
         }
@@ -94,7 +94,7 @@
         },
         "features": {
             "elasticsearch": {
-                "version": "8.14.1",
+                "version": "8.16.1",
                 "installDataToWorkspaces": true
             }
         }
@@ -108,7 +108,7 @@
         "features": {
             "entrypoints": {},
             "elasticsearch": {
-                "version": "7.17.22",
+                "version": "7.17.25",
                 "install-runit-service": false
             }
         },
@@ -125,7 +125,7 @@
         "features": {
             "entrypoints": {},
             "elasticsearch": {
-                "version": "8.14.1",
+                "version": "8.16.1",
                 "install-runit-service": false
             }
         },
@@ -143,7 +143,7 @@
         "features": {
             "entrypoints": {},
             "elasticsearch": {
-                "version": "7.17.22",
+                "version": "7.17.25",
                 "install-runit-service": false
             }
         },
@@ -160,7 +160,7 @@
         "features": {
             "entrypoints": {},
             "elasticsearch": {
-                "version": "8.14.1",
+                "version": "8.16.1",
                 "install-runit-service": false
             }
         },
