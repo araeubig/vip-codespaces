@@ -35,6 +35,11 @@ xdebug_83_alpine() {
     rm -f /etc/php81/conf.d/50_xdebug.ini
 }
 
+xdebug_84_alpine() {
+    apk add --no-cache php84-pecl-xdebug -X https://dl-cdn.alpinelinux.org/alpine/edge/testing
+    rm -f /etc/php81/conf.d/50_xdebug.ini
+}
+
 xdebug_81_deb() {
     apt-get install -y --no-install-recommends php8.1-xdebug
 }
@@ -45,6 +50,10 @@ xdebug_82_deb() {
 
 xdebug_83_deb() {
     apt-get install -y --no-install-recommends php8.3-xdebug
+}
+
+xdebug_84_deb() {
+    apt-get install -y --no-install-recommends php8.4-xdebug
 }
 
 if [ "$(id -u || true)" -ne 0 ]; then
@@ -86,6 +95,9 @@ case "${ID_LIKE}" in
             8.3)
                 xdebug_83_deb
             ;;
+            8.4)
+                xdebug_84_deb
+            ;;
             *)
                 echo "(!) Unsupported PHP version: ${PHP_VERSION}"
                 exit 1
@@ -108,6 +120,9 @@ case "${ID_LIKE}" in
             ;;
             8.3)
                 xdebug_83_alpine
+            ;;
+            8.4)
+                xdebug_84_alpine
             ;;
             *)
                 echo "(!) Unsupported PHP version: ${PHP_VERSION}"

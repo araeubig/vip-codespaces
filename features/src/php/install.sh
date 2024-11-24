@@ -157,6 +157,7 @@ setup_php83_alpine() {
         EXTENSIONS=
     fi
 
+    # shellcheck disable=SC2086
     apk add --no-cache \
         icu-data-full ghostscript \
         php83 php83-fpm php83-pear \
@@ -196,7 +197,7 @@ setup_php83_alpine() {
         php83-xml \
         php83-xmlreader \
         php83-xmlwriter \
-        php83-zip
+        php83-zip ${EXTENSIONS}
 
     if [ "${SKIP_GMAGICK}" != 'true' ]; then
         apk add --no-cache php83-dev gcc make libc-dev graphicsmagick-dev libtool graphicsmagick libgomp
@@ -216,6 +217,77 @@ setup_php83_alpine() {
     [ ! -f /usr/bin/phar ] && ln -s /usr/bin/phar83 /usr/bin/phar
     [ ! -f /usr/bin/php ] && ln -s /usr/bin/php83 /usr/bin/php
     [ ! -f /usr/sbin/php-fpm ] && ln -s /usr/sbin/php-fpm83 /usr/sbin/php-fpm
+    true
+}
+
+setup_php84_alpine() {
+    if [ "${LITE_INSTALL}" != 'true' ]; then
+        # missing: php84-pecl-mcrypt php84-pecl-timezonedb
+        EXTENSIONS="icu-data-full ghostscript php84-bcmath php84-ftp php84-intl php84-soap php84-pecl-igbinary php84-pecl-ssh2"
+    else
+        EXTENSIONS=
+    fi
+
+    # shellcheck disable=SC2086
+    apk add --no-cache \
+        icu-data-full ghostscript \
+        php84 php84-fpm php84-pear \
+        php84-pecl-apcu \
+        php84-calendar \
+        php84-ctype \
+        php84-curl \
+        php84-dom \
+        php84-exif \
+        php84-fileinfo \
+        php84-ftp \
+        php84-gd \
+        php84-gmp \
+        php84-iconv \
+        php84-mbstring \
+        php84-pecl-memcache \
+        php84-pecl-memcached \
+        php84-mysqli \
+        php84-mysqlnd \
+        php84-opcache \
+        php84-openssl \
+        php84-pcntl \
+        php84-pdo \
+        php84-pdo_mysql \
+        php84-pdo_sqlite \
+        php84-phar \
+        php84-posix \
+        php84-session \
+        php84-shmop \
+        php84-simplexml \
+        php84-sockets \
+        php84-sodium \
+        php84-sqlite3 \
+        php84-sysvsem \
+        php84-sysvshm \
+        php84-tokenizer \
+        php84-xml \
+        php84-xmlreader \
+        php84-xmlwriter \
+        php84-zip ${EXTENSIONS} -X https://dl-cdn.alpinelinux.org/alpine/edge/testing
+
+    if [ "${SKIP_GMAGICK}" != 'true' ]; then
+        apk add --no-cache php84-dev gcc make libc-dev graphicsmagick-dev libtool graphicsmagick libgomp -X https://dl-cdn.alpinelinux.org/alpine/edge/testing
+        pecl84 channel-update pecl.php.net
+        pecl84 install channel://pecl.php.net/gmagick-2.0.6RC1 < /dev/null || true
+        echo "extension=gmagick.so" > /etc/php84/conf.d/40_gmagick.ini
+        apk del --no-cache php84-dev gcc make libc-dev graphicsmagick-dev libtool
+    fi
+
+    # Alpine Edge: this symlink is broken
+    rm -f /usr/bin/phar.phar
+
+    [ ! -f /usr/bin/pear ] && ln -s /usr/bin/pear84 /usr/bin/pear
+    [ ! -f /usr/bin/peardev ] && ln -s /usr/bin/peardev84 /usr/bin/peardev
+    [ ! -f /usr/bin/pecl ] && ln -s /usr/bin/pecl84 /usr/bin/pecl
+    [ ! -f /usr/bin/phar.phar ] && ln -s /usr/bin/phar.phar84 /usr/bin/phar.phar
+    [ ! -f /usr/bin/phar ] && ln -s /usr/bin/phar84 /usr/bin/phar
+    [ ! -f /usr/bin/php ] && ln -s /usr/bin/php84 /usr/bin/php
+    [ ! -f /usr/sbin/php-fpm ] && ln -s /usr/sbin/php-fpm84 /usr/sbin/php-fpm
     true
 }
 
@@ -342,6 +414,47 @@ setup_php83_deb() {
     update-rc.d -f php8.3-fpm remove
 }
 
+setup_php84_deb() {
+    if [ "${LITE_INSTALL}" != 'true' ]; then
+        EXTENSIONS="ghostscript php8.4-bcmath php8.4-igbinary php8.4-intl php8.4-mcrypt php8.4-soap php8.4-ssh2"
+    else
+        EXTENSIONS=
+    fi
+
+    if [ "${SKIP_GMAGICK}" != 'true' ]; then
+        EXTENSIONS="${EXTENSIONS} php8.4-gmagick"
+    fi
+
+    # shellcheck disable=SC2086
+    eatmydata apt-get install -y --no-install-recommends \
+        php8.4-cli php8.4-fpm \
+        php8.4-apcu php8.4-curl php8.4-gd php8.4-gmp php8.4-mbstring \
+        php8.4-memcache php8.4-memcached php8.4-mysql php8.4-sqlite3 php8.4-xml php8.4-zip ${EXTENSIONS}
+    eatmydata apt-get install -y --no-install-recommends php-pear
+    phpdismod ffi gettext readline sysvmsg xsl
+
+    ln -s /usr/sbin/php-fpm8.4 /usr/sbin/php-fpm
+
+    if [ "${LITE_INSTALL}" != 'true' ]; then
+        PACKAGES="php8.4-dev"
+        if ! hash make >/dev/null 2>&1; then
+            PACKAGES="${PACKAGES} make"
+        fi
+
+        # shellcheck disable=SC2086
+        eatmydata apt-get install -y --no-install-recommends ${PACKAGES}
+        pecl channel-update pecl.php.net
+        pecl install timezonedb < /dev/null
+        echo "extension=timezonedb.so" > /etc/php/8.4/mods-available/timezonedb.ini
+        phpenmod timezonedb
+
+        # shellcheck disable=SC2086
+        eatmydata apt-get remove --purge -y ${PACKAGES}
+    fi
+
+    update-rc.d -f php8.4-fpm remove
+}
+
 echo "(*) Installing PHP ${PHP_VERSION}..."
 
 # shellcheck source=/dev/null
@@ -423,6 +536,11 @@ case "${ID_LIKE}" in
                 setup_php83_deb
             ;;
 
+            "8.4")
+                PHP_INI_DIR=/etc/php/8.4
+                setup_php84_deb
+            ;;
+
             *)
                 echo "(!) PHP version ${PHP_VERSION} is not supported."
                 exit 1
@@ -472,6 +590,11 @@ case "${ID_LIKE}" in
             "8.3")
                 PHP_INI_DIR=/etc/php83
                 setup_php83_alpine
+            ;;
+
+            "8.4")
+                PHP_INI_DIR=/etc/php84
+                setup_php84_alpine
             ;;
 
             *)
