@@ -342,6 +342,47 @@ setup_php83_deb() {
     update-rc.d -f php8.3-fpm remove
 }
 
+setup_php84_deb() {
+    if [ "${LITE_INSTALL}" != 'true' ]; then
+        EXTENSIONS="ghostscript php8.4-bcmath php8.4-igbinary php8.4-intl php8.4-mcrypt php8.4-soap php8.4-ssh2"
+    else
+        EXTENSIONS=
+    fi
+
+    if [ "${SKIP_GMAGICK}" != 'true' ]; then
+        EXTENSIONS="${EXTENSIONS} php8.4-gmagick"
+    fi
+
+    # shellcheck disable=SC2086
+    eatmydata apt-get install -y --no-install-recommends \
+        php8.4-cli php8.4-fpm \
+        php8.4-apcu php8.4-curl php8.4-gd php8.4-gmp php8.4-mbstring \
+        php8.4-memcache php8.4-memcached php8.4-mysql php8.4-sqlite3 php8.4-xml php8.4-zip ${EXTENSIONS}
+    eatmydata apt-get install -y --no-install-recommends php-pear
+    phpdismod ffi gettext readline sysvmsg xsl
+
+    ln -s /usr/sbin/php-fpm8.4 /usr/sbin/php-fpm
+
+    if [ "${LITE_INSTALL}" != 'true' ]; then
+        PACKAGES="php8.4-dev"
+        if ! hash make >/dev/null 2>&1; then
+            PACKAGES="${PACKAGES} make"
+        fi
+
+        # shellcheck disable=SC2086
+        eatmydata apt-get install -y --no-install-recommends ${PACKAGES}
+        pecl channel-update pecl.php.net
+        pecl install timezonedb < /dev/null
+        echo "extension=timezonedb.so" > /etc/php/8.4/mods-available/timezonedb.ini
+        phpenmod timezonedb
+
+        # shellcheck disable=SC2086
+        eatmydata apt-get remove --purge -y ${PACKAGES}
+    fi
+
+    update-rc.d -f php8.4-fpm remove
+}
+
 echo "(*) Installing PHP ${PHP_VERSION}..."
 
 # shellcheck source=/dev/null
@@ -421,6 +462,11 @@ case "${ID_LIKE}" in
             "8.3")
                 PHP_INI_DIR=/etc/php/8.3
                 setup_php83_deb
+            ;;
+
+            "8.4")
+                PHP_INI_DIR=/etc/php/8.4
+                setup_php84_deb
             ;;
 
             *)
