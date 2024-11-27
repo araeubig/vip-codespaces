@@ -65,7 +65,7 @@ jobs:
         uses: Automattic/vip-actions/expose-github-runtime@e1faabf165941008de4c0c1381df153e49d8ad2c # v0.6.0
 
       - name: Set up Docker
-        uses: crazy-max/ghaction-setup-docker@26145a578dce008fee793528d031cd72c57d51af # v3.4.0
+        uses: crazy-max/ghaction-setup-docker@635d07c09dc2b52072362e9bb37e7e789767106d # v3.5.0
         with:
           daemon-config: |
             {
