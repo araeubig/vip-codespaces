@@ -221,6 +221,13 @@ setup_php83_alpine() {
 }
 
 setup_php84_alpine() {
+    alpine_version="$(cat /etc/alpine-release)"
+    if [ "$(printf '%s\n' "3.21" "${alpine_version}" | sort -V | head -n1 || true)" = "3.21" ]; then
+        REPOS=""
+    else
+        REPOS="-X https://dl-cdn.alpinelinux.org/alpine/v3.21/community"
+    fi
+
     if [ "${LITE_INSTALL}" != 'true' ]; then
         # missing: php84-pecl-mcrypt php84-pecl-timezonedb
         EXTENSIONS="icu-data-full ghostscript php84-bcmath php84-ftp php84-intl php84-soap php84-pecl-igbinary php84-pecl-ssh2"
@@ -268,10 +275,11 @@ setup_php84_alpine() {
         php84-xml \
         php84-xmlreader \
         php84-xmlwriter \
-        php84-zip ${EXTENSIONS} -X https://dl-cdn.alpinelinux.org/alpine/edge/testing
+        php84-zip ${EXTENSIONS} ${REPOS}
 
     if [ "${SKIP_GMAGICK}" != 'true' ]; then
-        apk add --no-cache php84-dev gcc make libc-dev graphicsmagick-dev libtool graphicsmagick libgomp -X https://dl-cdn.alpinelinux.org/alpine/edge/testing
+        # shellcheck disable=SC2086
+        apk add --no-cache php84-dev gcc make libc-dev graphicsmagick-dev libtool graphicsmagick libgomp ${REPOS}
         pecl84 channel-update pecl.php.net
         pecl84 install channel://pecl.php.net/gmagick-2.0.6RC1 < /dev/null || true
         echo "extension=gmagick.so" > /etc/php84/conf.d/40_gmagick.ini
