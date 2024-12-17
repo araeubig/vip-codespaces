@@ -65,7 +65,7 @@ jobs:
         uses: Automattic/vip-actions/expose-github-runtime@e1faabf165941008de4c0c1381df153e49d8ad2c # v0.6.0
 
       - name: Set up Docker
-        uses: docker/setup-docker-action@01efb57f882e3b1a22e7cf3501dbe51287b0ecb4 # v4.0.0
+        uses: docker/setup-docker-action@370a7dad4b8ce8dbf00f9363e1652e5074dd6abe # v4.1.0
         with:
           daemon-config: |
             {
@@ -79,7 +79,7 @@ jobs:
         if: steps.changes.outputs.needs_build == 'true'
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@c47758b77c9736f4b2ef4073d4d51994fabfe349 # v3.7.1
+        uses: docker/setup-buildx-action@6524bf65af31da8d45b59e8c27de4bd072b392f5 # v3.8.0
         if: steps.changes.outputs.needs_build == 'true'
 
       - name: Log in to GitHub Docker Registry
