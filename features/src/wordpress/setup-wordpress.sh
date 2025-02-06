@@ -99,6 +99,7 @@ if [ -n "${multisite_domain}" ]; then
     else
         wp config set SUBDOMAIN_INSTALL true --raw --config-file=/wp/config/wp-config.php
     fi
+    wp config set SUNRISE true --raw  --config-file=/wp/config/wp-config.php
 fi
 wp config shuffle-salts --config-file=/wp/config/wp-config.php
 
